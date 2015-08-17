@@ -1,0 +1,29 @@
+data:
+  build: ./php-fpm
+  volumes:
+    - ./../:/var/www/thesis
+  command: php /var/www/thesis/php/server.php
+  ports:
+    - "5337:5337"
+
+php:
+  build: ./php-fpm
+  volumes:
+    - ./../:/var/www/thesis
+    - ./php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
+    - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+  links:
+    - data
+
+nginx:
+  image: nginx:1.9
+  volumes:
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./../:/var/www/thesis
+  links:
+    - php
+  ports:
+    - '80:80'
+
+
