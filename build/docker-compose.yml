@@ -2,9 +2,10 @@ data:
   build: ./php-fpm
   volumes:
     - ./../:/var/www/MonsterMinigame
+    - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
   command: php /var/www/MonsterMinigame/php/server.php
-  ports:
-    - "5337:5337"
+  environment:
+     XDEBUG_CONFIG: "remote_host=172.17.42.1"
 
 php:
   build: ./php-fpm

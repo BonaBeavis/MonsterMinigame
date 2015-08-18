@@ -2,8 +2,6 @@ FROM php:5.6-fpm
 
 MAINTAINER Gordian Dziwis <gordian.dziwis@gmail.com>
 
-RUN apt-get update && apt-get install -y lsof --no-install-recommends && rm -r /var/lib/apt/lists/*
-
 # Install Xdebug
 RUN pecl install xdebug 
 
