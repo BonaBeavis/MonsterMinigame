@@ -1,538 +1,580 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8" />
-	<title>Steam Community :: Monster Summer Sale</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-	<link href="/assets/css/towerattack.css?v=UYpREnpPsNO9" rel="stylesheet" type="text/css" >
-	<link href="/assets/css/towerattack_listgames.css?v=UYpREnpPsNO9" rel="stylesheet" type="text/css" >
-	<script type="text/javascript" src="/assets/javascript/thirdparty/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript">$J = jQuery.noConflict();</script>
-	<script type="text/javascript" src="/assets/javascript/ui.js"></script>
+  <meta charset="UTF-8" />
+  <title>Steam Community :: Monster Summer Sale</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link href="/assets/css/towerattack.css?v=UYpREnpPsNO9" rel="stylesheet" type="text/css">
+  <link href="/assets/css/towerattack_listgames.css?v=UYpREnpPsNO9" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="/assets/javascript/thirdparty/jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+    $J = jQuery.noConflict();
+  </script>
+  <script type="text/javascript" src="/assets/javascript/ui.js"></script>
 
-	<script>
-		g_sessionID = "";
-		g_steamID = "1";
+  <script>
+    g_sessionID = "";
+    g_steamID = "1";
 
-		$J( function() {
-			$J( "#player_stat_highest_level").text( FormatNumberForDisplay( '10061040' ) );
-			$J( "#player_stat_most_gold").text( FormatNumberForDisplay( '2806530424180614.5' ) );
-			$J( "#player_stat_most_damage").text( FormatNumberForDisplay( '4.3698203032315623e+025' ) );
-			$J( "#player_gold").text( FormatNumberForDisplay( '66315547920810.539' ) );
-			$J( "#player_current_level").text( FormatNumberForDisplay( '2458676' ) );
-		});
+    $J(function() {
+      $J("#player_stat_highest_level").text(FormatNumberForDisplay('10061040'));
+      $J("#player_stat_most_gold").text(FormatNumberForDisplay('2806530424180614.5'));
+      $J("#player_stat_most_damage").text(FormatNumberForDisplay('4.3698203032315623e+025'));
+      $J("#player_gold").text(FormatNumberForDisplay('66315547920810.539'));
+      $J("#player_current_level").text(FormatNumberForDisplay('2458676'));
+    });
 
-		function StartNewGame()
-		{
-			JoinGame( 0 );
-		}
+    function StartNewGame() {
+      JoinGame(0);
+    }
 
-		function JoinGame( gameid )
-		{
-			var promptLeaveGame = ShowConfirmDialog( 'Leave Existing Game?', gameid == 0 ? 'You\'ll have to leave your current game to join a new game.<br><br>You will not be able to rejoin your current game.<br><br>Are you sure you want to do this?' : 'You\'ll have to leave your current game to join this game.<br><br>You will not be able to rejoin your current game.<br><br>Do you still want to join this game?' );
-			promptLeaveGame.done(
-				function () {
-					$J.post(
-						'http://steamcommunity.com/minigame/ajaxleavegame/',
-						{ 'gameid' : '45869', 'sessionid' : g_sessionID }
-						).done( function() {
-							JoinGameHelper( gameid );
-						}
-						);
-					}
-					);
-		}
+    function JoinGame(gameid) {
+      var promptLeaveGame = ShowConfirmDialog('Leave Existing Game?', gameid == 0 ? 'You\'ll have to leave your current game to join a new game.<br><br>You will not be able to rejoin your current game.<br><br>Are you sure you want to do this?' : 'You\'ll have to leave your current game to join this game.<br><br>You will not be able to rejoin your current game.<br><br>Do you still want to join this game?');
+      promptLeaveGame.done(
+        function() {
+          $J.post(
+            'http://steamcommunity.com/minigame/ajaxleavegame/', {
+              'gameid': '45869',
+              'sessionid': g_sessionID
+            }
+          ).done(function() {
+            JoinGameHelper(gameid);
+          });
+        }
+      );
+    }
 
-		function JoinGameHelper( gameid )
-		{
-			$J.post(
-				'http://steamcommunity.com/minigame/ajaxjoingame/',
-				{ 'gameid' : gameid, 'sessionid' : g_sessionID }
-				).done( function( json ) {
-					if ( json.success == '1' )
-					{
-						top.location.href = 'http://steamcommunity.com/minigame/towerattack/';
-					}
-					else
-					{
-						ShowAlertDialog( 'Error', 'There was a problem trying to join a game. Please try again later.' );
-					}
-				}
-				).fail( function( jqXHR ) {
-					var responseJSON = jqXHR.responseText.evalJSON();
-					if ( responseJSON.success == '24' && responseJSON.errorMsg )
-					{
-						ShowAlertDialog( 'Error', responseJSON.errorMsg );
-					}
-					else if ( responseJSON.success == '25' )
-					{
-						ShowAlertDialog( 'Error', 'There was a problem trying to join the game: it already has the maximum number of players.' );
-					}
-					else if ( responseJSON.success == '28' )
-					{
-						ShowAlertDialog( 'Error', 'You have previously left this game. You cannot join this game again.' );
-					}
-					else
-					{
-						ShowAlertDialog( 'Error', 'There was a problem trying to join a game. Please try again later.' );
-					}
-				}
-				);
-			}
+    function JoinGameHelper(gameid) {
+      $J.post(
+        'http://steamcommunity.com/minigame/ajaxjoingame/', {
+          'gameid': gameid,
+          'sessionid': g_sessionID
+        }
+      ).done(function(json) {
+        if (json.success == '1') {
+          top.location.href = 'http://steamcommunity.com/minigame/towerattack/';
+        } else {
+          ShowAlertDialog('Error', 'There was a problem trying to join a game. Please try again later.');
+        }
+      }).fail(function(jqXHR) {
+        var responseJSON = jqXHR.responseText.evalJSON();
+        if (responseJSON.success == '24' && responseJSON.errorMsg) {
+          ShowAlertDialog('Error', responseJSON.errorMsg);
+        } else if (responseJSON.success == '25') {
+          ShowAlertDialog('Error', 'There was a problem trying to join the game: it already has the maximum number of players.');
+        } else if (responseJSON.success == '28') {
+          ShowAlertDialog('Error', 'You have previously left this game. You cannot join this game again.');
+        } else {
+          ShowAlertDialog('Error', 'There was a problem trying to join a game. Please try again later.');
+        }
+      });
+    }
 
-			function FindGame()
-			{
-				JoinGame( 0 );
-			}
+    function FindGame() {
+      JoinGame(0);
+    }
 
-			function ShowFriendsGames()
-			{
-				var waiting = ShowBlockingWaitDialog( 'Please Wait', 'Retrieving friends games...' );
-				$J.ajax(
-				{
-					url: 'http://steamcommunity.com/minigame/ajaxlistfriendsgames/',
-					type: 'POST',
-					data: { 'current_gameid' : '45869' },
-					dataType: 'json'
-				}
-				).done(
-				function( data ) {
-					waiting.Dismiss();
-					if ( data.num_games == 0 )
-					{
-						ShowAlertDialog( 'Friends\' Games','Your friends are not currently in any active games.' );
-					}
-					else
-					{
-						ShowAlertDialog( 'Friends\' Games', data.html, 'Cancel ' );
-					}
-				}
-				).fail(
-				function( jqXHR ) {
-					waiting.Dismiss();
-					ShowAlertDialog( 'Error', 'There was a problem trying to retrieve the list of games your friends are playing in. Please try again later.' );
-				}
-				);
-			}
-		</script>
-	</head>
-	<body class="flat_page "  lang="en">
-	<div class="page_background" style="background-image: url('/assets/images/promo_bg/08_volcano_page_background.jpg');">
+    function ShowFriendsGames() {
+      var waiting = ShowBlockingWaitDialog('Please Wait', 'Retrieving friends games...');
+      $J.ajax({
+        url: 'http://steamcommunity.com/minigame/ajaxlistfriendsgames/',
+        type: 'POST',
+        data: {
+          'current_gameid': '45869'
+        },
+        dataType: 'json'
+      }).done(
+        function(data) {
+          waiting.Dismiss();
+          if (data.num_games == 0) {
+            ShowAlertDialog('Friends\' Games', 'Your friends are not currently in any active games.');
+          } else {
+            ShowAlertDialog('Friends\' Games', data.html, 'Cancel ');
+          }
+        }
+      ).fail(
+        function(jqXHR) {
+          waiting.Dismiss();
+          ShowAlertDialog('Error', 'There was a problem trying to retrieve the list of games your friends are playing in. Please try again later.');
+        }
+      );
+    }
+  </script>
+</head>
 
-		<div class="section_overview">
-			<div class="section_monster">
-				<div class="monster_ctn">
-					<img class="promo_creep" src="/assets/images/promo_bg/08_volcano_creep.gif?v=1">
-					<img class="promo_creep_shadow" src="/assets/images/promo_bg/shadow_small.png">
-					<div class="boss_ctn">
-						<img class="promo_boss" src="/assets/images/promo_bg/08_volcano_boss.gif?v=1">
-					</div>
-					<img class="promo_boss_shadow" src="/assets/images/promo_bg/shadow_large.png">
-				</div>
-			</div>
+<body class="flat_page " lang="en">
+  <div class="page_background" style="background-image: url('/assets/images/promo_bg/08_volcano_page_background.jpg');">
+
+    <div class="section_overview">
+      <div class="section_monster">
+        <div class="monster_ctn">
+          <img class="promo_creep" src="/assets/images/promo_bg/08_volcano_creep.gif?v=1">
+          <img class="promo_creep_shadow" src="/assets/images/promo_bg/shadow_small.png">
+          <div class="boss_ctn">
+            <img class="promo_boss" src="/assets/images/promo_bg/08_volcano_boss.gif?v=1">
+          </div>
+          <img class="promo_boss_shadow" src="/assets/images/promo_bg/shadow_large.png">
+        </div>
+      </div>
 
 
-			<div class="section_play">
-				<div class="logo"><img src="/assets/images/logo_main_english.png"></div>
+      <div class="section_play">
+        <div class="logo"><img src="/assets/images/logo_main_english.png"></div>
 
 
-				<!-- Play Button -->
-				<div class="current_game">
-					<div>
-						<a href="http://steamcommunity.com/minigame/towerattack/" class="main_btn">
-							<span>Resume Your Game</span>
-						</a>
-						<p class="start_new">or, <a href="javascript:StartNewGame();">start a new game</a></p>
-					</div>
-				</div>
+        <!-- Play Button -->
+        <div class="current_game">
+          <div>
+            <a href="http://steamcommunity.com/minigame/towerattack/" class="main_btn">
+              <span>Resume Your Game</span>
+            </a>
+            <p class="start_new">or, <a href="javascript:StartNewGame();">start a new game</a></p>
+          </div>
+        </div>
 
-				<!-- Player count -->
-				<div class="player_count">
-					609,056 people playing<br>
-					566 games in progress
-				</div>
+        <!-- Player count -->
+        <div class="player_count">
+          609,056 people playing
+          <br> 566 games in progress
+        </div>
 
-			</div>
-			<br clear="both">
+      </div>
+      <br clear="both">
 
-			<div class="section_status">
-				<div class="section_yours">
+      <div class="section_status">
+        <div class="section_yours">
 
-					<div class="friends_games">
-						<div class="title">Join a friend's game</div>
-						<div class="friends_games_area">
-							<div class="friends">
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-								<div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
-							</div>
-							<div class="see_friends_btn" onclick="ShowFriendsGames()"><span>See friends games</span></div>
+          <div class="friends_games">
+            <div class="title">Join a friend's game</div>
+            <div class="friends_games_area">
+              <div class="friends">
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+                <div class="friend" data-miniprofile=""><img src="/assets/images/ph_avatar.jpg"></div>
+              </div>
+              <div class="see_friends_btn" onclick="ShowFriendsGames()"><span>See friends games</span></div>
 
-						</div>
-					</div>
-					<div class="your_stats">
-						<div class="title">Your stats</div>
-						<div class="stat_ctn">
-							<div class="stat">
-								Highest Level<br>
-								<span id="player_stat_highest_level">10,061,040</span>
-							</div>
-							<div class="stat">
-								Most Gold<br>
-								<span id="player_stat_most_gold"></span>
-							</div>
-							<div class="stat">
-								Most Damage<br>
-								<span id="player_stat_most_damage"></span>
-							</div>
-							<div class="stat">
-								Cards Unlocked<br>
-								<span>16</span> <a class="tooltip" data-tooltip-content="Earn Summer Sale trading cards for free by playing the Monster Game. See FAQ below for details.">(?)</a>
-							</div>
-							<br clear="both">
+            </div>
+          </div>
+          <div class="your_stats">
+            <div class="title">Your stats</div>
+            <div class="stat_ctn">
+              <div class="stat">
+                Highest Level
+                <br>
+                <span id="player_stat_highest_level">10,061,040</span>
+              </div>
+              <div class="stat">
+                Most Gold
+                <br>
+                <span id="player_stat_most_gold"></span>
+              </div>
+              <div class="stat">
+                Most Damage
+                <br>
+                <span id="player_stat_most_damage"></span>
+              </div>
+              <div class="stat">
+                Cards Unlocked
+                <br>
+                <span>16</span> <a class="tooltip" data-tooltip-content="Earn Summer Sale trading cards for free by playing the Monster Game. See FAQ below for details.">(?)</a>
+              </div>
+              <br clear="both">
 
-							<div class="badges">
-								<div class="left_badge">
-									<img src="/assets/images/badge_none.png">
-									<span>Summer Sale 2015<br>Level 1</span>
-								</div>
-								<div class="right_badge">
-									<img src="/assets/images/badge_none.png">
-									<span>Summer Sale 2015 Foil<br>Level 1</span>
-								</div>
-							</div>
+              <div class="badges">
+                <div class="left_badge">
+                  <img src="/assets/images/badge_none.png">
+                  <span>Summer Sale 2015<br>Level 1</span>
+                </div>
+                <div class="right_badge">
+                  <img src="/assets/images/badge_none.png">
+                  <span>Summer Sale 2015 Foil<br>Level 1</span>
+                </div>
+              </div>
 
-						</div>
-					</div>
-				</div>
-				<div class="section_today">
-					<div class="title">Today's Game</div>
+            </div>
+          </div>
+        </div>
+        <div class="section_today">
+          <div class="title">Today's Game</div>
 
-					<div class="stat">
-						Your Level<br>
-						<span id="player_current_level">
+          <div class="stat">
+            Your Level
+            <br>
+            <span id="player_current_level">
 							2,458,676											</span>
-						</div>
-						<div class="stat two">
-							Your Gold<br>
-							<span id="player_gold"></span>
-						</div>
-						<br clear="both">
-
-						<div class="summary_milestones">Community Milestones<br>6/9 unlocked</div>
-
-						<div class="milestone_indicators">
-							<img src="/assets/images/milestone_checked.png">
-							<img src="/assets/images/milestone_checked.png">
-							<img src="/assets/images/milestone_checked.png">
-							<img src="/assets/images/milestone_checked.png">
-							<img src="/assets/images/milestone_checked.png">
-							<img src="/assets/images/milestone_checked.png">
-							<img src="/assets/images/milestone_pending.png">
-							<img src="/assets/images/milestone_pending.png">
-							<img src="/assets/images/milestone_pending.png">
-							<br clear="both">
-						</div>
-
-						<a href="#milestones" class="milestone_btn"><span>See Milestones</span></a>
-					</div>
-				</div>
-
-			</div>
-
-			<!-- HOW IT WORKS -->
-			<div class="section_how_it_works">
-				<div class="title"><span>How it works</span></div>
-
-				<div class="section_hiw_left">
-					<div class="one">
-						<div class="title">Get Summer Sale Badge</div>
-						<p class="subtitle">Collect all 10 Summer Sale trading cards to craft the badge.</p>
-						<img src="/assets/images/how_it_works_cards.png?v=3">
-						<p>You can get trading cards in a few ways:
-							<ul>
-								<li>As a reward for purchasing from the Steam Store</li>
-								<li>Crafting game badges</li>
-								<li>Playing the Monster Game</li>
-								<li>Trading with friends</li>
-								<li>Purchasing them in the Community Market</li>
-							</ul></p>
-							<p>See the <a href="#FAQ">Frequently Asked Questions</a> for more details on earning Summer Sale trading cards.</p>
-						</div>
-						<div class="two">
-							<div class="title">Level Up Your Badge</div>
-							<p>Increasing the level of your Summer Sale badge by crafting Summer Sale trading cards will grant you additional abilities and rewards in the Monster Game.</p>
-						</div>
-					</div>
-
-					<div class="section_hiw_right">
-						<div class="one">
-							<div class="title">Play Monster Game</div>
-							<p>Join a game and fight the enemy monsters as you help your team level up, unlock new abilities, and achieve community milestones. Plus, get Summer Sale Trading Cards just for playing.</p>
-						</div>
-						<div class="two">
-							<div class="title">Get Upgrades And<br>Help Your Team</div>
-							<p>The more damage you do to the enemies, the more your team benefits. Plus, special abilities can heal your teammates or boost everyone’s damage and help the whole team level up faster.</p>
-						</div>
-						<div class="three">
-							<div class="title">Unlock Special Discounts</div>
-							<p>Defeat monsters, activate abilities, reach new worlds, and complete other event milestones to help unlock special game discounts for everyone.</p>
-							<a href="#milestones" class="milestone_btn"><span>See Milestones</span></a>
-						</div>
-					</div>
-
-				</div>
-
-
-
-				<!-- MILESTONES -->
-				<a name="milestones"></a><div class="section_milestones">
-				<div class="title"><span>Daily Milestones</span></div>
-				<p>With your help, players of the Monster Game can work together to unlock special 48-hour discounts on select games. Each milestone reached unlocks a new discount on a mystery game, available to everyone on Steam at 10am Pacific time the following day. New milestones each day through June 18.</p>
-
-				<div class="instructions">
-					<div class="one">
-						<span>1</span>
-						<p>Work together each day to achieve group milestones in the Monster Game.</p>
-					</div>
-					<div class="two">
-						<span>2</span>
-						<p>Each milestone will unlock a special 48-hour discount on a new game</p>
-					</div>
-					<div class="three">
-						<span>3</span>
-						<p>At 10am each day, the games unlocked during the previous day will be unveiled and put on sale.</p>
-					</div>
-
-				</div>
-
-				<br clear="both">
-
-				<div class="milestones">
-					<div class="title_block">
-						<div class="title">Today's Milestones (Day 8)</div>
-						<div class="time_display">
-							20:34:49				</div>
-							<div class="time_remaining">Time Remaining: </div>
-							<br clear="both">
-						</div>
-
-
-						<div class="milestone">
-							<div class="title">Join The Game</div>
-							<div class="desc">Unlocks once the specified number of people have joined any Monster Summer Game today</div>
-							<!-- <div>Current Stat: 600,939</div> -->
-							<div class="milestone_step">
-								<div class="milestone_number">50,000</div>
-								<div class="milestone_progress"><div class="progress_indicator" style="width: 100%"><img src="http://steamcommunity-a.akamaihd.net/public/images/blank.gif"></div></div>
-
-								<div class="milestone_game">
-									<div class="milestone_tag">
-										<a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
-										<a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
-										<br><a href="http://store.steampowered.com/tag/en/Trucks\">More Trucks</a>
-									</div>
-									<div class="milestone_deal_will_unlock">Milestone Reached!<br>Deal will unlock at 10am Pacific Time</div>
-									<div class="milestone_game_logo">
-										<a href="http://store.steampowered.com/app/227300/">
-											<img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911">
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="milestone_step">
-								<div class="milestone_number">250,000</div>
-								<div class="milestone_progress"><div class="progress_indicator" style="width: 100%"><img src="http://steamcommunity-a.akamaihd.net/public/images/blank.gif"></div></div>
-
-								<div class="milestone_game">
-									<div class="milestone_tag">
-										<a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
-										<a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
-										<br><a href="http://store.steampowered.com/tag/en/Trucks\">More Trucks</a>
-									</div>
-									<div class="milestone_deal_will_unlock">Milestone Reached!<br>Deal will unlock at 10am Pacific Time</div>
-									<div class="milestone_game_logo">
-										<a href="http://store.steampowered.com/app/227300/">
-											<img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911">
-										</a>
-									</div>
-								</div>
-							</div>
-							<div class="milestone_step">
-								<div class="milestone_number">1,000,000</div>
-								<div class="milestone_progress"><div class="progress_indicator" style="width: 46%"><img src="http://steamcommunity-a.akamaihd.net/public/images/blank.gif"></div></div>
-
-								<div class="milestone_game">
-									<div class="milestone_tag">
-										<a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
-										<a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
-										<br><a href="http://store.steampowered.com/tag/en/Trucks\">More Trucks</a>
-									</div>
-									<div class="milestone_status">Milestone Not Yet Reached</div>
-								</div>
-							</div>
-							<div style="clear: left"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="section_deals">
-					<div class="title"><span>Stuff 'n things</span></div>
-					<p>Unlocked deals used to be here, but we don't need it!</p>
-
-					<div class="deals">
-						<div class="title_block">
-							<div class="title">Things</div>
-							<div class="time_display">
-								00:00:00				</div>
-								<div class="time_remaining">Trucks leave in: </div>
-								<br clear="both">
-							</div>
-
-
-							<div class="deals_list">
-
-								<div class="deal_game">
-									<a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
-									<span>100%</span>
-								</div>
-								<div class="deal_game">
-									<a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
-									<span>100%</span>
-								</div>
-								<div class="deal_game">
-									<a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
-									<span>100%</span>
-								</div>
-								<div class="deal_game">
-									<a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
-									<span>100%</span>
-								</div>
-
-								<!-- End repeat -->
-
-								<br clear="both">
-
-							</div>
-
-							<div class="no_deals" style="display: none;">No deals unlocked yet. Join the Monster Summer Game to help defeat monsters and unlock special deals for tomorrow.</div>
-
-						</div>
-
-					</div>
-
-					<div class="section_faq">
-						<div class="title"><span>Frequently Asked Questions</span></div>
-
-						<div class="faq_left">
-							<div class="faq_q">Does the game go on forever?</div>
-							<div class="faq_a"><p>At 9am Pacific time each day, all game sessions in the Monster Summer Game will end. All players can then join a new game, beginning with attacking the level 1 enemies again. When you start a new game, you will start with special badge points that you can spend on abilities. The amount of badge points you get is based on the maximum boss level you’ve completed in the game on any previous day, plus the level of your Steam Summer Sale badge.</p>
-								<p>The Monster Summer Game will be available to play until June 20th at 10am PDT.</p>
-							</div>
-
-							<div class="faq_q">Can I die in the game?</div>
-							<div class="faq_a"><p>Yes, you have limited number of health points and the enemy monsters are doing damage to you. If your health points reach zero, you will die. Once dead, you can click to respawn in 5 seconds, or you will respawn automatically in five minutes--even when you are not signed in to Steam.</p></div>
-
-							<div class="faq_q">Can I join a game that is already in progress?</div>
-							<div class="faq_a"><p>When you click to start a game, you will be matched up with other players starting out at level 0. If you have a friend in an active game, you may join that game if you have previously achieved a similar level or higher than the game you are joining.</p></div>
-
-						</div>
-
-
-						<div class="faq_right">
-							<div class="faq_q">What happens to the game when I close Steam?</div>
-							<div class="faq_a"><p>Once you’ve joined a game session (which you accomplish by clicking the huge green ‘play now’ button near the top of this page) then you are in the game for the day unless you specifically choose to join a different game. While in a game, you will collect gold from any monster killed in your lane, whether you helped damage them or not.</p></div>
-
-							<div class="faq_q">What is the Monster Summer Game badge?</div>
-							<div class="faq_a"><p>Once you join a game session in the Monster Summer Game, you'll earn a new Monster Summer Game badge on your Steam profile. This badge will automatically level up to the highest boss level you’ve completed in the Monster Summer game.</p></div>
-
-							<div class="faq_q">What does the Summer Sale badge and Monster Game badge get me?</div>
-							<div class="faq_a"><p>Each level of your Summer Sale badge and each 10 levels of your Monster Game badge will get you a special Badge Point to spend when you start a Monster Summer Game. These points can be used to buy special abilities to help you and your team.</p></div>
-
-						</div>
-						<br clear="both">
-
-					</div>
-
-					<a name="FAQ"></a><div class="section_faq">
-					<div class="title"><span>More Frequently Asked Questions</span></div>
-
-					<div class="faq_left">
-						<div class="faq_q">What are trading cards?</div>
-						<div class="faq_a"><p>Steam Trading Cards are virtual cards earned by buying and playing games on Steam that can be crafted into game badges that grant community rewards.</p>
-							<p>Get an <a href="http://steamcommunity.com/tradingcards/">introduction to trading cards</a></p></div>
-
-							<div class="faq_q">How do I get the Summer Sale badge?</div>
-							<div class="faq_a"><p>Once you’ve collected the entire set of cards you can craft them into the Summer Sale badge to show off on your profile. From your Badges page, select a ready to craft badge to view its details and click on the blue 'Craft a Badge' button.</p>
-								<p>View <a href="http://steamcommunity.com/my/badges/">your Summer Sale badge page</a></p></div>
-
-								<div class="faq_q">What do I get when I craft the badge?</div>
-								<div class="faq_a"><p>Crafting the Summer Sale badge earns you an emoticon and profile background. All rewards are tradable and marketable. Collecting and crafting another set of cards will level up your badge and earn you more items. Each time you craft a badge your Steam Level will also increase.</p></div>
-
-								<div class="faq_q">And the foil badge?</div>
-								<div class="faq_a"><p>Crafting the foil Summer Sale badge earns you extra Steam Level XP, plus an emoticon and profile background.</p></div>
-
-								<div class="faq_q">What is unique to this badge?</div>
-								<div class="faq_a"><p>During the sale there is no limit to the number of times you can upgrade this badge. The Summer Sale badge will drop a set of one emoticon and background each time you craft a new level.</p>
-									<p>Unlike previous badges, once the sale ends the cards will disappear. Make sure to trade and craft your badges before June 22nd 10am PDT.</p></div>
-
-									<div class="faq_q">Got more questions?</div>
-									<div class="faq_a"><p>Check out the <a href="http://steamcommunity.com/tradingcards/faq/">full Trading Cards FAQ</a></p></div>
-
-								</div>
-
-								<div class="faq_right">
-									<div class="faq_q">How do I get Summer Sale trading cards?</div>
-									<div class="faq_a"><p>Summer Sale trading cards are only available during the Monster Summer Sale. There are five ways to get the cards:</p></div>
-
-									<div class="faq_subset">
-										<div class="faq_q first">Craft a game badge</div>
-										<div class="faq_a"><p>Starting June 1st, crafting a game badge earned you a Summer Sale trading card rather than a coupon, so if you crafted a badge in the last week you’re already ahead of the game. During the sale, each game badge you craft will get you an additional Summer Sale trading card.</p></div>
-
-										<div class="faq_q">Make a purchase</div>
-										<div class="faq_a"><p>As an extra reward for purchasing, for every $10 USD spent during the sale, you’ll receive a Summer Sale trading card. From your Summer Sale badge page select “How do I get more cards?” to track your purchasing progress.</p></div>
-
-										<div class="faq_q">Play the Monster Summer Game</div>
-										<div class="faq_a"><p>If you’re Steam Level 8 and above, you’ll get a Summer Sale trading card at random intervals while playing, up to three per 24-hour period. (If you reach Steam Level 8 before the end of the sale, you’ll be granted the cards you earned by playing the Monster Summer Game).</p></div>
-
-										<div class="faq_q">Trade for them</div>
-										<div class="faq_a"><p>That’s why they’re called trading cards! Find friends with other cards and make trades. Your Monster Card badge page shows which friends have the cards you need.</p></div>
-
-										<div class="faq_q">Buy them from the Community Market</div>
-										<div class="faq_a"><p>Sell the cards you don’t need and buy the ones you do, all with other Community members. Turn those duplicate cards into Steam Wallet funds to buy games.</p>
-											<p>View the <a href="http://steamcommunity.com/market/">Community market</a>.</p></div>
-										</div>
-
-									</div>
-
-									<br clear="both">
-
-								</div>
-
-								<div class="section_credits">
-									<div class="title"><span>Credits &amp; Acknowledgements</span></div>
-									<p>As you can probably tell from the style of the summer game, we’ve been kind of obsessed with a few clicker games that have become popular. It started a while ago with Cookie Clicker, then with <a href="http://store.steampowered.com/app/346900/">AdVenture Capitalist</a> and more recently with <a href="http://store.steampowered.com/app/363970/">Clicker Heroes</a> (which has roughly 56 Trillion players on Steam). The Monster Summer Game is a bit of an homage to those clicker games as well as old pixel artwork from generations of past favorites.</p>
-									<p>With the Monster Summer Game, we're also trying to take the opportunity to highlight as many of the great titles available on Steam as we can. One of the ways we're doing this is by utilizing the Steam Emoticons provided by a few titles and using them as ability icons within the Monster Summer Game. If you're interested in learning more about the games behind these icons, check out the list here.</p>
-
-									<div class="credits_left">
-
-
-									</div>
-
-									<div class="credits_middle">
-
-
-									</div>
-
-									<div class="credits_right">
-
-									</div>
-								</div>
-							</div>
-						</body>
-						</html>
+          </div>
+          <div class="stat two">
+            Your Gold
+            <br>
+            <span id="player_gold"></span>
+          </div>
+          <br clear="both">
+
+          <div class="summary_milestones">Community Milestones
+            <br>6/9 unlocked</div>
+
+          <div class="milestone_indicators">
+            <img src="/assets/images/milestone_checked.png">
+            <img src="/assets/images/milestone_checked.png">
+            <img src="/assets/images/milestone_checked.png">
+            <img src="/assets/images/milestone_checked.png">
+            <img src="/assets/images/milestone_checked.png">
+            <img src="/assets/images/milestone_checked.png">
+            <img src="/assets/images/milestone_pending.png">
+            <img src="/assets/images/milestone_pending.png">
+            <img src="/assets/images/milestone_pending.png">
+            <br clear="both">
+          </div>
+
+          <a href="#milestones" class="milestone_btn"><span>See Milestones</span></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="section_how_it_works">
+      <div class="title"><span>How it works</span></div>
+
+      <div class="section_hiw_left">
+        <div class="one">
+          <div class="title">Get Summer Sale Badge</div>
+          <p class="subtitle">Collect all 10 Summer Sale trading cards to craft the badge.</p>
+          <img src="/assets/images/how_it_works_cards.png?v=3">
+          <p>You can get trading cards in a few ways:
+            <ul>
+              <li>As a reward for purchasing from the Steam Store</li>
+              <li>Crafting game badges</li>
+              <li>Playing the Monster Game</li>
+              <li>Trading with friends</li>
+              <li>Purchasing them in the Community Market</li>
+            </ul>
+          </p>
+          <p>See the <a href="#FAQ">Frequently Asked Questions</a> for more details on earning Summer Sale trading cards.</p>
+        </div>
+        <div class="two">
+          <div class="title">Level Up Your Badge</div>
+          <p>Increasing the level of your Summer Sale badge by crafting Summer Sale trading cards will grant you additional abilities and rewards in the Monster Game.</p>
+        </div>
+      </div>
+
+      <div class="section_hiw_right">
+        <div class="one">
+          <div class="title">Play Monster Game</div>
+          <p>Join a game and fight the enemy monsters as you help your team level up, unlock new abilities, and achieve community milestones. Plus, get Summer Sale Trading Cards just for playing.</p>
+        </div>
+        <div class="two">
+          <div class="title">Get Upgrades And
+            <br>Help Your Team</div>
+          <p>The more damage you do to the enemies, the more your team benefits. Plus, special abilities can heal your teammates or boost everyone’s damage and help the whole team level up faster.</p>
+        </div>
+        <div class="three">
+          <div class="title">Unlock Special Discounts</div>
+          <p>Defeat monsters, activate abilities, reach new worlds, and complete other event milestones to help unlock special game discounts for everyone.</p>
+          <a href="#milestones" class="milestone_btn"><span>See Milestones</span></a>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <!-- MILESTONES -->
+    <a name="milestones"></a>
+    <div class="section_milestones">
+      <div class="title"><span>Daily Milestones</span></div>
+      <p>With your help, players of the Monster Game can work together to unlock special 48-hour discounts on select games. Each milestone reached unlocks a new discount on a mystery game, available to everyone on Steam at 10am Pacific time the following day. New milestones each day through June 18.</p>
+
+      <div class="instructions">
+        <div class="one">
+          <span>1</span>
+          <p>Work together each day to achieve group milestones in the Monster Game.</p>
+        </div>
+        <div class="two">
+          <span>2</span>
+          <p>Each milestone will unlock a special 48-hour discount on a new game</p>
+        </div>
+        <div class="three">
+          <span>3</span>
+          <p>At 10am each day, the games unlocked during the previous day will be unveiled and put on sale.</p>
+        </div>
+
+      </div>
+
+      <br clear="both">
+
+      <div class="milestones">
+        <div class="title_block">
+          <div class="title">Today's Milestones (Day 8)</div>
+          <div class="time_display">
+            20:34:49 </div>
+          <div class="time_remaining">Time Remaining: </div>
+          <br clear="both">
+        </div>
+
+
+        <div class="milestone">
+          <div class="title">Join The Game</div>
+          <div class="desc">Unlocks once the specified number of people have joined any Monster Summer Game today</div>
+          <!-- <div>Current Stat: 600,939</div> -->
+          <div class="milestone_step">
+            <div class="milestone_number">50,000</div>
+            <div class="milestone_progress">
+              <div class="progress_indicator" style="width: 100%"><img src="http://steamcommunity-a.akamaihd.net/public/images/blank.gif"></div>
+            </div>
+
+            <div class="milestone_game">
+              <div class="milestone_tag">
+                <a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
+                <a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
+                <br><a href="http://store.steampowered.com/tag/en/Trucks\">More Trucks</a>
+              </div>
+              <div class="milestone_deal_will_unlock">Milestone Reached!
+                <br>Deal will unlock at 10am Pacific Time</div>
+              <div class="milestone_game_logo">
+                <a href="http://store.steampowered.com/app/227300/">
+                  <img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="milestone_step">
+            <div class="milestone_number">250,000</div>
+            <div class="milestone_progress">
+              <div class="progress_indicator" style="width: 100%"><img src="http://steamcommunity-a.akamaihd.net/public/images/blank.gif"></div>
+            </div>
+
+            <div class="milestone_game">
+              <div class="milestone_tag">
+                <a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
+                <a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
+                <br><a href="http://store.steampowered.com/tag/en/Trucks\">More Trucks</a>
+              </div>
+              <div class="milestone_deal_will_unlock">Milestone Reached!
+                <br>Deal will unlock at 10am Pacific Time</div>
+              <div class="milestone_game_logo">
+                <a href="http://store.steampowered.com/app/227300/">
+                  <img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="milestone_step">
+            <div class="milestone_number">1,000,000</div>
+            <div class="milestone_progress">
+              <div class="progress_indicator" style="width: 46%"><img src="http://steamcommunity-a.akamaihd.net/public/images/blank.gif"></div>
+            </div>
+
+            <div class="milestone_game">
+              <div class="milestone_tag">
+                <a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
+                <a href="http://store.steampowered.com/tag/en/Trucks\">Trucks</a>
+                <br><a href="http://store.steampowered.com/tag/en/Trucks\">More Trucks</a>
+              </div>
+              <div class="milestone_status">Milestone Not Yet Reached</div>
+            </div>
+          </div>
+          <div style="clear: left"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section_deals">
+      <div class="title"><span>Stuff 'n things</span></div>
+      <p>Unlocked deals used to be here, but we don't need it!</p>
+
+      <div class="deals">
+        <div class="title_block">
+          <div class="title">Things</div>
+          <div class="time_display">
+            00:00:00 </div>
+          <div class="time_remaining">Trucks leave in: </div>
+          <br clear="both">
+        </div>
+
+
+        <div class="deals_list">
+
+          <div class="deal_game">
+            <a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
+            <span>100%</span>
+          </div>
+          <div class="deal_game">
+            <a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
+            <span>100%</span>
+          </div>
+          <div class="deal_game">
+            <a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
+            <span>100%</span>
+          </div>
+          <div class="deal_game">
+            <a href="http://store.steampowered.com/app/227300/"><img src="http://cdn.akamai.steamstatic.com/steam/apps/227300/header.jpg?t=1432655911"></a>
+            <span>100%</span>
+          </div>
+
+          <!-- End repeat -->
+
+          <br clear="both">
+
+        </div>
+
+        <div class="no_deals" style="display: none;">No deals unlocked yet. Join the Monster Summer Game to help defeat monsters and unlock special deals for tomorrow.</div>
+
+      </div>
+
+    </div>
+
+    <div class="section_faq">
+      <div class="title"><span>Frequently Asked Questions</span></div>
+
+      <div class="faq_left">
+        <div class="faq_q">Does the game go on forever?</div>
+        <div class="faq_a">
+          <p>At 9am Pacific time each day, all game sessions in the Monster Summer Game will end. All players can then join a new game, beginning with attacking the level 1 enemies again. When you start a new game, you will start with special badge points that you can spend on abilities. The amount of badge points you get is based on the maximum boss level you’ve completed in the game on any previous day, plus the level of your Steam Summer Sale badge.</p>
+          <p>The Monster Summer Game will be available to play until June 20th at 10am PDT.</p>
+        </div>
+
+        <div class="faq_q">Can I die in the game?</div>
+        <div class="faq_a">
+          <p>Yes, you have limited number of health points and the enemy monsters are doing damage to you. If your health points reach zero, you will die. Once dead, you can click to respawn in 5 seconds, or you will respawn automatically in five minutes--even when you are not signed in to Steam.</p>
+        </div>
+
+        <div class="faq_q">Can I join a game that is already in progress?</div>
+        <div class="faq_a">
+          <p>When you click to start a game, you will be matched up with other players starting out at level 0. If you have a friend in an active game, you may join that game if you have previously achieved a similar level or higher than the game you are joining.</p>
+        </div>
+
+      </div>
+
+
+      <div class="faq_right">
+        <div class="faq_q">What happens to the game when I close Steam?</div>
+        <div class="faq_a">
+          <p>Once you’ve joined a game session (which you accomplish by clicking the huge green ‘play now’ button near the top of this page) then you are in the game for the day unless you specifically choose to join a different game. While in a game, you will collect gold from any monster killed in your lane, whether you helped damage them or not.</p>
+        </div>
+
+        <div class="faq_q">What is the Monster Summer Game badge?</div>
+        <div class="faq_a">
+          <p>Once you join a game session in the Monster Summer Game, you'll earn a new Monster Summer Game badge on your Steam profile. This badge will automatically level up to the highest boss level you’ve completed in the Monster Summer game.</p>
+        </div>
+
+        <div class="faq_q">What does the Summer Sale badge and Monster Game badge get me?</div>
+        <div class="faq_a">
+          <p>Each level of your Summer Sale badge and each 10 levels of your Monster Game badge will get you a special Badge Point to spend when you start a Monster Summer Game. These points can be used to buy special abilities to help you and your team.</p>
+        </div>
+
+      </div>
+      <br clear="both">
+
+    </div>
+
+    <a name="FAQ"></a>
+    <div class="section_faq">
+      <div class="title"><span>More Frequently Asked Questions</span></div>
+
+      <div class="faq_left">
+        <div class="faq_q">What are trading cards?</div>
+        <div class="faq_a">
+          <p>Steam Trading Cards are virtual cards earned by buying and playing games on Steam that can be crafted into game badges that grant community rewards.</p>
+          <p>Get an <a href="http://steamcommunity.com/tradingcards/">introduction to trading cards</a></p>
+        </div>
+
+        <div class="faq_q">How do I get the Summer Sale badge?</div>
+        <div class="faq_a">
+          <p>Once you’ve collected the entire set of cards you can craft them into the Summer Sale badge to show off on your profile. From your Badges page, select a ready to craft badge to view its details and click on the blue 'Craft a Badge' button.</p>
+          <p>View <a href="http://steamcommunity.com/my/badges/">your Summer Sale badge page</a></p>
+        </div>
+
+        <div class="faq_q">What do I get when I craft the badge?</div>
+        <div class="faq_a">
+          <p>Crafting the Summer Sale badge earns you an emoticon and profile background. All rewards are tradable and marketable. Collecting and crafting another set of cards will level up your badge and earn you more items. Each time you craft a badge your Steam Level will also increase.</p>
+        </div>
+
+        <div class="faq_q">And the foil badge?</div>
+        <div class="faq_a">
+          <p>Crafting the foil Summer Sale badge earns you extra Steam Level XP, plus an emoticon and profile background.</p>
+        </div>
+
+        <div class="faq_q">What is unique to this badge?</div>
+        <div class="faq_a">
+          <p>During the sale there is no limit to the number of times you can upgrade this badge. The Summer Sale badge will drop a set of one emoticon and background each time you craft a new level.</p>
+          <p>Unlike previous badges, once the sale ends the cards will disappear. Make sure to trade and craft your badges before June 22nd 10am PDT.</p>
+        </div>
+
+        <div class="faq_q">Got more questions?</div>
+        <div class="faq_a">
+          <p>Check out the <a href="http://steamcommunity.com/tradingcards/faq/">full Trading Cards FAQ</a></p>
+        </div>
+
+      </div>
+
+      <div class="faq_right">
+        <div class="faq_q">How do I get Summer Sale trading cards?</div>
+        <div class="faq_a">
+          <p>Summer Sale trading cards are only available during the Monster Summer Sale. There are five ways to get the cards:</p>
+        </div>
+
+        <div class="faq_subset">
+          <div class="faq_q first">Craft a game badge</div>
+          <div class="faq_a">
+            <p>Starting June 1st, crafting a game badge earned you a Summer Sale trading card rather than a coupon, so if you crafted a badge in the last week you’re already ahead of the game. During the sale, each game badge you craft will get you an additional Summer Sale trading card.</p>
+          </div>
+
+          <div class="faq_q">Make a purchase</div>
+          <div class="faq_a">
+            <p>As an extra reward for purchasing, for every $10 USD spent during the sale, you’ll receive a Summer Sale trading card. From your Summer Sale badge page select “How do I get more cards?” to track your purchasing progress.</p>
+          </div>
+
+          <div class="faq_q">Play the Monster Summer Game</div>
+          <div class="faq_a">
+            <p>If you’re Steam Level 8 and above, you’ll get a Summer Sale trading card at random intervals while playing, up to three per 24-hour period. (If you reach Steam Level 8 before the end of the sale, you’ll be granted the cards you earned by playing the Monster Summer Game).</p>
+          </div>
+
+          <div class="faq_q">Trade for them</div>
+          <div class="faq_a">
+            <p>That’s why they’re called trading cards! Find friends with other cards and make trades. Your Monster Card badge page shows which friends have the cards you need.</p>
+          </div>
+
+          <div class="faq_q">Buy them from the Community Market</div>
+          <div class="faq_a">
+            <p>Sell the cards you don’t need and buy the ones you do, all with other Community members. Turn those duplicate cards into Steam Wallet funds to buy games.</p>
+            <p>View the <a href="http://steamcommunity.com/market/">Community market</a>.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <br clear="both">
+
+    </div>
+
+    <div class="section_credits">
+      <div class="title"><span>Credits &amp; Acknowledgements</span></div>
+      <p>As you can probably tell from the style of the summer game, we’ve been kind of obsessed with a few clicker games that have become popular. It started a while ago with Cookie Clicker, then with <a href="http://store.steampowered.com/app/346900/">AdVenture Capitalist</a> and more recently with <a href="http://store.steampowered.com/app/363970/">Clicker Heroes</a> (which has roughly 56 Trillion players on Steam). The Monster Summer Game is a bit of an homage to those clicker games as well as old pixel artwork from generations of past favorites.</p>
+      <p>With the Monster Summer Game, we're also trying to take the opportunity to highlight as many of the great titles available on Steam as we can. One of the ways we're doing this is by utilizing the Steam Emoticons provided by a few titles and using them as ability icons within the Monster Summer Game. If you're interested in learning more about the games behind these icons, check out the list here.</p>
+
+      <div class="credits_left">
+
+
+      </div>
+
+      <div class="credits_middle">
+
+
+      </div>
+
+      <div class="credits_right">
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
