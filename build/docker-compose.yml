@@ -1,0 +1,30 @@
+data:
+  build: ./php-fpm
+  volumes:
+    - ./../:/var/www/MonsterMinigame
+    - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+  command: php /var/www/MonsterMinigame/php/server.php
+  environment:
+     XDEBUG_CONFIG: "remote_host=172.17.42.1"
+
+php:
+  build: ./php-fpm
+  volumes:
+    - ./../:/var/www/MonsterMinigame
+    - ./php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
+    - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+  links:
+    - data
+
+nginx:
+  image: nginx:1.9
+  volumes:
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./../:/var/www/MonsterMinigame
+  links:
+    - php
+  ports:
+    - '80:80'
+
+

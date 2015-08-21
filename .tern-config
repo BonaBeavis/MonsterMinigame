@@ -1,0 +1,9 @@
+{
+  "libs": [
+    "ecma6",
+    "jquery"
+  ],
+  "plugins": {
+    "node": {}
+  }
+}
