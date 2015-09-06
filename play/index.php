@@ -1,32 +1,35 @@
 <?php
-	session_start();
+session_start();
 
-	if( !isset( $_SESSION[ 'SteamID' ] ) )
-	{
-		header( 'Location: /' );
-		die;
-	}
+if( !isset( $_SESSION[ 'SteamID' ] ) )
+{
+    header( 'Location: /' );
+    die;
+}
 
-	$Config = json_decode( file_get_contents( __DIR__ . '/../php/files/config.json' ) );
-	$CDN = $Config->Assets->Host;
+$Config = json_decode( file_get_contents( __DIR__ . '/../php/files/config.json' ) );
+$CDN = $Config->Assets->Host;
 
-	header( 'Content-Security-Policy: ' .
-		'default-src \'none\'; ' .
-		'connect-src \'self\' ' . $CDN . '; ' .
-		'img-src \'self\' data: ' . $CDN . ' https://steamcdn-a.akamaihd.net https://www.google-analytics.com; ' .
-		'script-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . ' https://www.google-analytics.com; ' .
-		'style-src \'unsafe-inline\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
-		'font-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
-		'media-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; '
-	);
-?><!DOCTYPE html>
+header( 'Content-Security-Policy: ' .
+    'default-src \'none\'; ' .
+    'connect-src \'self\' ' . $CDN . '; ' .
+    'img-src \'self\' data: ' . $CDN . ' https://steamcdn-a.akamaihd.net https://www.google-analytics.com; ' .
+    'script-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . ' https://www.google-analytics.com; ' .
+    'style-src \'unsafe-inline\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
+    'font-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
+    'media-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; '
+);
+?>
+<!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8">
     <title>Tower Attack</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link href="<?php echo $CDN; ?>/assets/css/towerattack.css?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/css/towerattack.css' ); ?>" rel="stylesheet" type="text/css">
   </head>
+
   <body data-steamid="<?php echo $_SESSION[ 'SteamID' ]; ?>" data-gameid="1" data-assets="<?php echo $CDN; ?>" data-ga="<?php echo $Config->Google->Analytics; ?>">
 
     <div class="breadcrumbs">
@@ -52,7 +55,10 @@
                 <span class="title_upgrates abilities">Abilities</span>
                 <div class="container_purchase"></div>
               </div>
-            </div><div id="upgradesscroll"><div></div></div>
+            </div>
+            <div id="upgradesscroll">
+              <div></div>
+            </div>
           </div>
 
           <div id="elements">
@@ -65,7 +71,7 @@
                 <br>
                 <a class="link element_upgrade_btn" data-type="3" href="#" data-tooltip-func="fnTooltipUpgradeElementDesc">&nbsp;</a>
               </div>
-              <div class="element_upgrade"  id="upgr_4">
+              <div class="element_upgrade" id="upgr_4">
                 <img src="<?php echo $CDN; ?>/assets/emoticons/waterrune.png" alt="Water">
                 <span class="level">0</span>
                 <br>
@@ -91,44 +97,85 @@
           <div class="lanes desert">
             <a id="lane0" class="lane active" href="#" data-lane="0">
               <span class="label">Lane 1</span>
-              <div class="bar"><div></div></div>
-              <div class="lane_element" data-tooltip-func="fnTooltipLaneElementDesc"><span></span></div><!--
-              --><div class="lane_enemy enemy_icon_2" id="lane0_enemy_icon_2" data-tooltip-content="There is a Boss Monster in this lane!" style="display: none;">
-                <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div><!--
-              --><div class="lane_enemy enemy_icon_4" id="lane0_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
-            </a><a id="lane1" class="lane" href="#" data-lane="1">
+              <div class="bar">
+                <div></div>
+              </div>
+              <div class="lane_element" data-tooltip-func="fnTooltipLaneElementDesc"><span></span></div>
+              <!--
+              -->
+              <div class="lane_enemy enemy_icon_2" id="lane0_enemy_icon_2" data-tooltip-content="There is a Boss Monster in this lane!" style="display: none;">
+                <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
+              <!--
+              -->
+              <div class="lane_enemy enemy_icon_4" id="lane0_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
+            </a>
+            <a id="lane1" class="lane" href="#" data-lane="1">
               <span class="label">Lane 2</span>
-              <div class="bar"><div></div></div>
-              <div class="lane_element" data-tooltip-func="fnTooltipLaneElementDesc"><span></span></div><!--
-              --><div class="lane_enemy enemy_icon_2" id="lane1_enemy_icon_2" data-tooltip-content="There is a Boss Monster in this lane!" style="display: none;">
-                <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div><!--
-              --><div class="lane_enemy enemy_icon_4" id="lane1_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
-            </a><a id="lane2" class="lane" href="#" data-lane="2">
+              <div class="bar">
+                <div></div>
+              </div>
+              <div class="lane_element" data-tooltip-func="fnTooltipLaneElementDesc"><span></span></div>
+              <!--
+              -->
+              <div class="lane_enemy enemy_icon_2" id="lane1_enemy_icon_2" data-tooltip-content="There is a Boss Monster in this lane!" style="display: none;">
+                <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
+              <!--
+              -->
+              <div class="lane_enemy enemy_icon_4" id="lane1_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
+            </a>
+            <a id="lane2" class="lane" href="#" data-lane="2">
               <span class="label">Lane 3</span>
-              <div class="bar"><div></div></div>
-              <div class="lane_element" data-tooltip-func="fnTooltipLaneElementDesc"><span></span></div><!--
-              --><div class="lane_enemy enemy_icon_2" id="lane2_enemy_icon_2" data-tooltip-content="There is a Boss Monster in this lane!" style="display: none;">
-                <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div><!--
-              --><div class="lane_enemy enemy_icon_4" id="lane2_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
+              <div class="bar">
+                <div></div>
+              </div>
+              <div class="lane_element" data-tooltip-func="fnTooltipLaneElementDesc"><span></span></div>
+              <!--
+              -->
+              <div class="lane_enemy enemy_icon_2" id="lane2_enemy_icon_2" data-tooltip-content="There is a Boss Monster in this lane!" style="display: none;">
+                <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
+              <!--
+              -->
+              <div class="lane_enemy enemy_icon_4" id="lane2_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
             </a>
           </div>
 
           <div class="teamdpscontainer">
             <span class="title_teamdps">Team DPS</span>
             <div id="teamdps"></div>
-          </div><div class="teamhealthcontainer">
+          </div>
+          <div class="teamhealthcontainer">
             <span class="title_teamhealth">Team Health</span>
-            <div><div class="teamhealth" id="teamhealth_0"><div></div>
-              </div><div class="teamhealth" id="teamhealth_1"><div></div>
-              </div><div class="teamhealth" id="teamhealth_2"><div></div>
-              </div><div class="teamhealth" id="teamhealth_3"><div></div>
-              </div><div class="teamhealth" id="teamhealth_4"><div></div>
-              </div><div class="teamhealth" id="teamhealth_5"><div></div>
-              </div><div class="teamhealth" id="teamhealth_6"><div></div>
-              </div><div class="teamhealth" id="teamhealth_7"><div></div>
-              </div><div class="teamhealth" id="teamhealth_8"><div></div>
-              </div><div class="teamhealth" id="teamhealth_9"><div></div>
-              </div>					
+            <div>
+              <div class="teamhealth" id="teamhealth_0">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_1">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_2">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_3">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_4">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_5">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_6">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_7">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_8">
+                <div></div>
+              </div>
+              <div class="teamhealth" id="teamhealth_9">
+                <div></div>
+              </div>
             </div>
           </div>
 
@@ -149,7 +196,12 @@
                 <td id="total_players">0</td>
               </tr>
             </table>
-            <div id="activitycontainer"><div></div></div><div id="activityscroll"><div></div></div>
+            <div id="activitycontainer">
+              <div></div>
+            </div>
+            <div id="activityscroll">
+              <div></div>
+            </div>
 
             <form id="chatform" class="chatform">
               <textarea name="message" maxlength="500" placeholder="Your chat message"></textarea>
@@ -161,16 +213,19 @@
         <div id="row_top">
           <div id="level_container">
             <div class="game_time">
-              Game Time<br>
+              Game Time
+              <br>
               <span id="game_time"></span>
             </div>
 
             <div class="level_container2">
-              Level <div id="level"></div>
+              Level
+              <div id="level"></div>
             </div>
 
             <div class="level_time">
-              Level Time<br>
+              Level Time
+              <br>
               <span id="level_time"></span>
             </div>
           </div>
@@ -200,13 +255,14 @@
             <div class="title_dead">You are dead</div>
             <div class="title_dead_sub">Don't worry, you'll still be in this game helping to take down the monsters and earning in-game gold and items.</div>
             <div class="cannot_respawn">
-              Can respawn in: 						<span class="timeleft"></span>
+              Can respawn in: <span class="timeleft"></span>
             </div>
             <span class="btn_respawn" id="player_respawn_btn">
               <span>Respawn Now</span>
             </span>
             <div class="automatically_respawn">
-              You will respawn<br>automatically in: 						<span class="timeleft"></span>
+              You will respawn
+              <br>automatically in: <span class="timeleft"></span>
             </div>
             <div style="clear: left"></div>
           </div>
@@ -224,8 +280,35 @@
         </div>
 
         <div id="loot_notification" style="display: none">
-          <span>Loot dropped: </span><br><span id="loot_name"></span>
+          <span>Loot dropped: </span>
+          <br><span id="loot_name"></span>
         </div>
+
+        <!-- Container for VeriLinks Widget -->
+        <div id="verilinks"></div>
+
+        <!-- Un-/lock-->
+        <p>
+          Locking verification methods:
+          <button onclick="VERILINKS.unlock();alert('verification unlocked')">unlock</button>
+          <button onclick="VERILINKS.lock();alert('verification locked')">lock</button>
+        </p>
+
+        <!-- verification -->
+        <p>
+          Verification of link:
+          <button onclick="VERILINKS.vTrue()">true</button>
+          <button onclick='VERILINKS.vFalse()'>false</button>
+          <button onclick='VERILINKS.vUnsure()'>unsure</button>
+        </p>
+        <p>
+          Get Evaluation of latest verification:
+          <button onclick='alert(VERILINKS.getEval())'>get evaluation</button>
+        </p>
+        <p>
+          Commit verified links:
+          <button id='commit' onclick='alert(VERILINKS.commit())'>commit verifications</button>
+        </p>
 
         <div class="player_ctn">
           <div class="player">
@@ -275,7 +358,7 @@
 
     <div style="width: 700px;margin: 0 auto;">
       <table id="stats" style="margin: 0 auto;float: left;width: 350px;background-color: #222;padding: 6px 20px;text-align: right;"></table>
-      <table id="player_stats" style="margin: 0 auto;float: left;width: 350px;background-color: #222;padding: 6px 20px;text-align: right;"></table>	
+      <table id="player_stats" style="margin: 0 auto;float: left;width: 350px;background-color: #222;padding: 6px 20px;text-align: right;"></table>
     </div>
 
     <div hidden>
@@ -285,7 +368,7 @@
         <img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png">
         <span class="nameblock">
           <span class="name"></span>
-          <span class="cost"></span>
+        <span class="cost"></span>
         </span>
         <span class="purchase_options">
           <div class="sub_item ten">
@@ -358,7 +441,8 @@
       <div id="chattemplate" class="activitytemplate chattemplate">
         <span class="icon"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></span>
         <span class="ability_text">
-          <span class="name"></span> <span class="action">said:</span> <div class="ability"></div>
+          <span class="name"></span> <span class="action">said:</span>
+        <div class="ability"></div>
         </span>
       </div>
 
@@ -366,7 +450,7 @@
         <span class="icon"><img src="<?php echo $CDN; ?>/assets/emoticons/happy_creep.png"></span>
         <span class="ability_text">
           <span class="name">Game Notice</span>
-          <div class="ability"></div>
+        <div class="ability"></div>
         </span>
       </div>
 
@@ -383,7 +467,9 @@
             <div class="name"></div>
           </div>
           <div class="barwrapper">
-            <div class="bar"><div></div></div>
+            <div class="bar">
+              <div></div>
+            </div>
             <div class="text"></div>
           </div>
         </div>
@@ -395,6 +481,7 @@
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi.min.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi-spine.min.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi-particles.min.js"></script>
+    <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/verilinks.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi-functions.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/thirdparty/pixi-functions.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/minigame.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/minigame.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/towerattack.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/towerattack.js' ); ?>"></script>
@@ -404,4 +491,5 @@
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/easing.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/easing.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/enemies.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/enemies.js' ); ?>"></script>
   </body>
-</html>
+
+  </html>
