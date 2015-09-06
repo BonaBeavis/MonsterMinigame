@@ -1,0 +1,6 @@
+{
+  "globalstrict": true,
+  "asi": true,
+  "browser": true,
+  "jquery": true
+}
