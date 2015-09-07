@@ -191,21 +191,18 @@ $J(window).bind('load', function()
 	$J( '.element_upgrade_btn' ).on( 'click', function()
 	{
 		g_Minigame.m_CurrentScene.TryUpgrade( this );
-
 		return false;
 	} );
 
 	$J( '.lane' ).on( 'click', function()
 	{
 		g_Minigame.m_CurrentScene.TryChangeLane( this.dataset.lane );
-
 		return false;
 	} );
 
 	document.getElementById( 'player_respawn_btn' ).addEventListener( 'click', function( ev )
 	{
 		ev.preventDefault();
-
 		g_Minigame.m_CurrentScene.m_rgAbilityQueue.push( {
 			'ability': k_ETowerAttackAbility_Respawn
 		} );
@@ -214,15 +211,19 @@ $J(window).bind('load', function()
 	document.getElementById( 'toggle_sfx_btn' ).addEventListener( 'click', function( ev )
 	{
 		ev.preventDefault();
-
 		g_AudioManager.ToggleSound();
 	}, false );
 
 	document.getElementById( 'toggle_music_btn' ).addEventListener( 'click', function( ev )
 	{
 		ev.preventDefault();
-
 		g_AudioManager.ToggleMusic();
+	}, false );
+
+	document.getElementById( 'verilinks_unlock' ).addEventListener( 'click', function( ev )
+	{
+		ev.preventDefault();
+                VERILINKS.unlock();
 	}, false );
 
 	g_Server = new CServerInterface( );

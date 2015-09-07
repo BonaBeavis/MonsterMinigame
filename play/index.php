@@ -267,24 +267,24 @@ header( 'Content-Security-Policy: ' .
             <!-- Un-/lock-->
             <p>
             Locking verification methods:
-            <button onclick="VERILINKS.unlock();alert('verification unlocked')">unlock</button>
-            <button onclick="VERILINKS.lock();alert('verification locked')">lock</button>
+            <div id="verilinks_unlock">unlock</div>
+            <div id="verilinks_lock">lock</div>
             </p>
 
             <!-- verification -->
             <p>
             Verification of link:
-            <button onclick="VERILINKS.vTrue()">true</button>
-            <button onclick='VERILINKS.vFalse()'>false</button>
-            <button onclick='VERILINKS.vUnsure()'>unsure</button>
+            <div id="verilinks_true">true</div>
+            <div id="verilinks_false">false</div>
+            <div id="verilinks_unsure">unsure</div>
             </p>
             <p>
             Get Evaluation of latest verification:
-            <button onclick='alert(VERILINKS.getEval())'>get evaluation</button>
+            <div id="verilinks_evaluation">get evaluation</div>
             </p>
             <p>
             Commit verified links:
-            <button id='commit' onclick='alert(VERILINKS.commit())'>commit verifications</button>
+            <div id="verilinks_commit">commit verifications</div>
             </p>
           </div>
         </div>
