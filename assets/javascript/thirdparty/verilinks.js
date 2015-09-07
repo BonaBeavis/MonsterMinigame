@@ -1,25 +1,25 @@
 VERILINKS = (function() {
-
+    "use strict"
     // map helper
     var lati = 0;
     var longi = 0;
     var isMap = false;
 
     // constants
-    const TRUE = 1;
-    const FALSE = 0;
-    const UNSURE = -1;
-    const EVAL_POSITIVE = 1;
-    const EVAL_NEGATIVE = -1;
-    const EVAL_UNSURE = 0;
-    const EVAL_FIRST = -2;
-    const EVAL_ERROR = -1111;
-    const EVAL_THRESHOLD = 0.3;
-    const CONTAINER = 'verilinks';
+    TRUE = 1;
+    FALSE = 0;
+    UNSURE = -1;
+    EVAL_POSITIVE = 1;
+    EVAL_NEGATIVE = -1;
+    EVAL_UNSURE = 0;
+    EVAL_FIRST = -2;
+    EVAL_ERROR = -1111;
+    EVAL_THRESHOLD = 0.3;
+    CONTAINER = 'verilinks';
 
     // const SERVER_URL = "http://localhost:8080/verilinks-server/";
     // const SERVER_URL = "/verilinks-server/server";
-    const SERVER_URL = "http://localhost:8080/";
+    SERVER_URL = "http://localhost:8080/";
     var link = null;
     // template for rendering
     var template = null;
@@ -41,7 +41,7 @@ VERILINKS = (function() {
     var timeoutObject;
 
     window.onload = function() {
-        insertScript(init);
+        init();
     };
 
     function init() {
@@ -54,56 +54,9 @@ VERILINKS = (function() {
         });
     }
 
-    // TODO: any other way to realize script insertion?
-    function insertScript(callback) {
-        var headID = document.getElementsByTagName("head")[0];
-        // jQuery
-        var jqueryScript = document.createElement('script');
-        jqueryScript.type = 'text/javascript';
-        jqueryScript.src =
-            '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js';
-        jqueryScript.onload = function() {
-            // openlayers
-            var mapScript = document.createElement('script');
-            mapScript.src =
-                'http://www.openlayers.org/api/OpenLayers.js';
-            mapScript.onload = function() {
-                // jsrender
-                var jsrenderScript = document.createElement(
-                    'script');
-                jsrenderScript.src =
-                    'https://raw.github.com/BorisMoore/jsrender/master/jsrender.js';
-                jsrenderScript.type = 'text/javascript';
-                jsrenderScript.onload = function() {
-                    // jsrScript
-                    var jsrScript = document.createElement(
-                        'script');
-                    jsrScript.type = 'text/x-jsrender';
-                    jsrScript.id = 'template';
-                    headID.appendChild(jsrScript);
-                    // jsr helper
-                    var helperScript = document.createElement(
-                        'script');
-                    helperScript.type = 'text/javascript';
-                    headID.appendChild(helperScript);
-                    var code =
-                        "$.views.helpers({setLat : function(val) {VERILINKS.setLat(val);VERILINKS.setIsMap(true);},setLong : function(val) {VERILINKS.setLong(val);}});"
-                    helperScript.text = code;
-                    // callback
-                    if (callback != undefined && typeof callback ==
-                        'function')
-                        callback();
-                }
-                headID.appendChild(jsrenderScript);
-            };
-            headID.appendChild(mapScript);
-        }
-        headID.appendChild(jqueryScript);
-    }
-
     // ajax call to get new link, draw link as callback
     function linkRequest(req, callback) {
-        if (req == null) {
+        if (req === null) {
             alert("Can't request link!");
             return null;
         }
@@ -114,10 +67,9 @@ VERILINKS = (function() {
                 if (xmlHttp.responseText == "Not found") {
                     alert("Error: Receiving Link!");
                 } else {
-                    var data = eval("(" + xmlHttp.responseText +
-                        ")");
+                    var data = "(" + xmlHttp.responseText + ")";
                     handleLink(data);
-                    if (callback != undefined && typeof callback ==
+                    if (callback !== undefined && typeof callback ==
                         'function')
                         callback();
                 }
@@ -214,7 +166,7 @@ VERILINKS = (function() {
             return;
         var div = 'object';
         var mapDiv = "map_" + div;
-        if ($("#" + mapDiv).length == 0) {
+        if ($("#" + mapDiv).length === 0) {
             $("#" + div).append(
                 "<div id='map' style='width:380px;height:200px;'></div>"
             );
@@ -248,7 +200,7 @@ VERILINKS = (function() {
         map.setCenter(position, zoom);
 
         // callback
-        if (callback != undefined && typeof callback == 'function') {
+        if (callback !== undefined && typeof callback == 'function') {
             callback();
         }
     }
@@ -262,7 +214,7 @@ VERILINKS = (function() {
 
     function templateRequest(templateId) {
         var tmpl;
-        if (templateId == null)
+        if (templateId === null)
             tmpl = "dbpedia-linkedgeodata";
         else
             tmpl = templateId;
@@ -285,31 +237,31 @@ VERILINKS = (function() {
     /** Check request params and generate Request URL */
     function generateURL(verification) {
         var url = SERVER_URL + "server?service=getLink"
-        if (user == null) {
+        if (user === null) {
             alert("user missing");
             return null;
         }
-        if (user.name.length == 0) {
+        if (user.name.length === 0) {
             alert("userName missing");
             return null;
         } else
             url += "&userName=" + user.name;
-        if (user.id.length == 0) {
+        if (user.id.length === 0) {
             alert("userId missing");
             return null;
         } else
             url += "&userId=" + user.id;
-        if (link != null) {
+        if (link !== null) {
             url += "&curLink=" + link.id;
         }
-        if (linkset == null || linkset.length == 0)
+        if (linkset === null || linkset.length === 0)
             return null;
         else
             url += "&linkset=" + linkset;
-        if (getVerifiedLinks() != null)
+        if (getVerifiedLinks() !== null)
             url += "&verifiedLinks=" + getVerifiedLinks();
         url += "&nextLink=" + getNextLink();
-        if (verification != null)
+        if (verification !== null)
             url += "&verification=" + verification;
         // alert(url);
         return url;
@@ -328,7 +280,7 @@ VERILINKS = (function() {
     }
 
     function getVerifiedLinks() {
-        if (verifiedLinks == null || verifiedLinks.length == 0)
+        if (verifiedLinks === null || verifiedLinks.length === 0)
             return null;
         var param = "";
         for (var i = 0; i < verifiedLinks.length; i++) {
@@ -377,26 +329,26 @@ VERILINKS = (function() {
 
     function timer() {
         if (!startOfGame)
-            timeoutObject = setTimeout('VERILINKS.unlock()', timeout);
+            timeoutObject = setTimeout(VERILINKS.unlock(), timeout);
     }
 
     return {
         // Get evaluation of previous link-verification
         getEval: function() {
-            var eval = "No verification done";
+            var evaluation = "No verification done";
             if (prevLinkEval == EVAL_FIRST)
-                eval = "first";
+                evaluation = "first";
             else if (prevLinkEval == EVAL_NEGATIVE)
-                eval = "penalty";
+                evaluation = "penalty";
             else if (prevLinkEval == EVAL_UNSURE)
-                eval = "unsure";
+                evaluation = "unsure";
             else if (prevLinkEval == EVAL_POSITIVE || prevLinkEval >
                 EVAL_THRESHOLD)
-                eval = "agreement";
+                evaluation = "agreement";
             else if (prevLinkEval <= EVAL_THRESHOLD)
-                eval = "disagreement";
+                evaluation = "disagreement";
             // alert(eval);
-            return eval;
+            return evaluation;
         },
         // Commit user's verification
         commit: function() {
