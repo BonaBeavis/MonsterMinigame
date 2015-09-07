@@ -485,6 +485,11 @@ a {
 	height: 100px;
 }
 
+#verilinks .task {
+	height: 300px;
+}
+
+#verilinks,
 #game_over_dialog,
 #player_dead_dialog {
 	position: absolute;

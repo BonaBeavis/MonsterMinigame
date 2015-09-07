@@ -108,8 +108,7 @@ header( 'Content-Security-Policy: ' .
               <!--
               -->
               <div class="lane_enemy enemy_icon_4" id="lane0_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
-            </a>
-            <a id="lane1" class="lane" href="#" data-lane="1">
+            </a><a id="lane1" class="lane" href="#" data-lane="1">
               <span class="label">Lane 2</span>
               <div class="bar">
                 <div></div>
@@ -122,8 +121,7 @@ header( 'Content-Security-Policy: ' .
               <!--
               -->
               <div class="lane_enemy enemy_icon_4" id="lane1_enemy_icon_4" data-tooltip-content="There is a Treasure Monster in this lane!<br><br>Treasure Monsters drop lots of gold, but disappear very quickly!" style="display: none;"><img src="<?php echo $CDN; ?>/assets/images/ability_template_ph.png"></div>
-            </a>
-            <a id="lane2" class="lane" href="#" data-lane="2">
+            </a><a id="lane2" class="lane" href="#" data-lane="2">
               <span class="label">Lane 3</span>
               <div class="bar">
                 <div></div>
@@ -142,39 +140,18 @@ header( 'Content-Security-Policy: ' .
           <div class="teamdpscontainer">
             <span class="title_teamdps">Team DPS</span>
             <div id="teamdps"></div>
-          </div>
-          <div class="teamhealthcontainer">
+          </div><div class="teamhealthcontainer">
             <span class="title_teamhealth">Team Health</span>
-            <div>
-              <div class="teamhealth" id="teamhealth_0">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_1">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_2">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_3">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_4">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_5">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_6">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_7">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_8">
-                <div></div>
-              </div>
-              <div class="teamhealth" id="teamhealth_9">
-                <div></div>
+            <div><div class="teamhealth" id="teamhealth_0"><div></div>
+              </div><div class="teamhealth" id="teamhealth_1"><div></div>
+              </div><div class="teamhealth" id="teamhealth_2"><div></div>
+              </div><div class="teamhealth" id="teamhealth_3"><div></div>
+              </div><div class="teamhealth" id="teamhealth_4"><div></div>
+              </div><div class="teamhealth" id="teamhealth_5"><div></div>
+              </div><div class="teamhealth" id="teamhealth_6"><div></div>
+              </div><div class="teamhealth" id="teamhealth_7"><div></div>
+              </div><div class="teamhealth" id="teamhealth_8"><div></div>
+              </div><div class="teamhealth" id="teamhealth_9"><div></div>
               </div>
             </div>
           </div>
@@ -285,30 +262,32 @@ header( 'Content-Security-Policy: ' .
         </div>
 
         <!-- Container for VeriLinks Widget -->
-        <div id="verilinks"></div>
+        <div id="verilinks">
+          <div class="task">
+            <!-- Un-/lock-->
+            <p>
+            Locking verification methods:
+            <button onclick="VERILINKS.unlock();alert('verification unlocked')">unlock</button>
+            <button onclick="VERILINKS.lock();alert('verification locked')">lock</button>
+            </p>
 
-        <!-- Un-/lock-->
-        <p>
-          Locking verification methods:
-          <button onclick="VERILINKS.unlock();alert('verification unlocked')">unlock</button>
-          <button onclick="VERILINKS.lock();alert('verification locked')">lock</button>
-        </p>
-
-        <!-- verification -->
-        <p>
-          Verification of link:
-          <button onclick="VERILINKS.vTrue()">true</button>
-          <button onclick='VERILINKS.vFalse()'>false</button>
-          <button onclick='VERILINKS.vUnsure()'>unsure</button>
-        </p>
-        <p>
-          Get Evaluation of latest verification:
-          <button onclick='alert(VERILINKS.getEval())'>get evaluation</button>
-        </p>
-        <p>
-          Commit verified links:
-          <button id='commit' onclick='alert(VERILINKS.commit())'>commit verifications</button>
-        </p>
+            <!-- verification -->
+            <p>
+            Verification of link:
+            <button onclick="VERILINKS.vTrue()">true</button>
+            <button onclick='VERILINKS.vFalse()'>false</button>
+            <button onclick='VERILINKS.vUnsure()'>unsure</button>
+            </p>
+            <p>
+            Get Evaluation of latest verification:
+            <button onclick='alert(VERILINKS.getEval())'>get evaluation</button>
+            </p>
+            <p>
+            Commit verified links:
+            <button id='commit' onclick='alert(VERILINKS.commit())'>commit verifications</button>
+            </p>
+          </div>
+        </div>
 
         <div class="player_ctn">
           <div class="player">
