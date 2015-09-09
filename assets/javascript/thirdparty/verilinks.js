@@ -6,20 +6,20 @@ VERILINKS = (function() {
     var isMap = false;
 
     // constants
-    TRUE = 1;
-    FALSE = 0;
-    UNSURE = -1;
-    EVAL_POSITIVE = 1;
-    EVAL_NEGATIVE = -1;
-    EVAL_UNSURE = 0;
-    EVAL_FIRST = -2;
-    EVAL_ERROR = -1111;
-    EVAL_THRESHOLD = 0.3;
-    CONTAINER = 'verilinks';
+    var TRUE = 1;
+    var FALSE = 0;
+    var UNSURE = -1;
+    var EVAL_POSITIVE = 1;
+    var EVAL_NEGATIVE = -1;
+    var EVAL_UNSURE = 0;
+    var EVAL_FIRST = -2;
+    var EVAL_ERROR = -1111;
+    var EVAL_THRESHOLD = 0.3;
+    var CONTAINER = 'verilinks';
 
     // const SERVER_URL = "http://localhost:8080/verilinks-server/";
     // const SERVER_URL = "/verilinks-server/server";
-    SERVER_URL = "http://localhost:8080/";
+    var SERVER_URL = "http://localhost:8080/";
     var link = null;
     // template for rendering
     var template = null;
@@ -61,7 +61,7 @@ VERILINKS = (function() {
             return null;
         }
 
-        xmlHttp = new XMLHttpRequest();
+        var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 if (xmlHttp.responseText == "Not found") {
@@ -80,7 +80,7 @@ VERILINKS = (function() {
 
         // alert(req);
         // ERROR in Chrome ----------- fallback to native js
-        // $.ajax({
+        // $J.ajax({
         // url : req,
         // success : function(data) {
         // handleLink(data);
@@ -166,12 +166,12 @@ VERILINKS = (function() {
             return;
         var div = 'object';
         var mapDiv = "map_" + div;
-        if ($("#" + mapDiv).length === 0) {
-            $("#" + div).append(
+        if ($J("#" + mapDiv).length === 0) {
+            $J("#" + div).append(
                 "<div id='map' style='width:380px;height:200px;'></div>"
             );
         } else {
-            $("#" + mapDiv).html("");
+            $J("#" + mapDiv).html("");
         }
         var map = new OpenLayers.Map("map");
         var mapnik = new OpenLayers.Layer.OSM();
@@ -207,7 +207,7 @@ VERILINKS = (function() {
 
     // draw link
     function render(data) {
-        $("#" + CONTAINER).html($("#template").render(data));
+        $J("#" + CONTAINER).html($J("#template").render(data));
         VERILINKS.lock();
         timer();
     }
@@ -222,16 +222,16 @@ VERILINKS = (function() {
         // var url = SERVER_URL + "server?service=getTemplate";
         var url = SERVER_URL + "server?service=getTemplate&template=" +
             tmpl;
-        // $.ajax({
+        // $J.ajax({
         // url : url,
         // success : function(data) {
         // // alert(data);
-        // $('#template').html(data);
+        // $J('#template').html(data);
         // if (callback != undefined && typeof callback == 'function')
         // callback();
         // }
         // });
-        $('#template').load(url);
+        $J('#template').load(url);
     }
 
     /** Check request params and generate Request URL */
@@ -271,11 +271,7 @@ VERILINKS = (function() {
         var min = 4;
         var max = 6;
         var rnd = Math.floor((Math.random() * max) + min);
-        if (verifiedLinks.length % rnd == rnd - 1) {
-            nextLink = true;
-        } else {
-            nextLink = false;
-        }
+        var nextLink = (verifiedLinks.length % rnd == rnd - 1);
         return false;
     }
 
@@ -357,7 +353,7 @@ VERILINKS = (function() {
                 "server?service=commitVerifications";
             var obj = new Commit();
             var json = JSON.stringify(obj);
-            $.ajax({
+            $J.ajax({
                 type: 'POST',
                 url: url,
                 data: json,
@@ -378,24 +374,24 @@ VERILINKS = (function() {
         },
         lock: function() {
             locked = true;
-            $(".lock").css({
+            $J(".lock").css({
                 opacity: 0.3
             });
-            // $("#start").removeAttr('disabled');
+            // $J("#start").removeAttr('disabled');
         },
         lockVerify: function() {
             locked = true;
-            $(".lock").css({
+            $J(".lock").css({
                 opacity: 0.3
             });
-            $("#start").removeAttr('disabled');
+            $J("#start").removeAttr('disabled');
         },
         unlock: function() {
             locked = false;
-            $(".lock").css({
+            $J(".lock").css({
                 opacity: 1
             });
-            $("#start").attr('disabled', 'disabled');
+            $J("#start").attr('disabled', 'disabled');
         },
         vTrue: function() {
             verify(TRUE);
