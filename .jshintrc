@@ -2,5 +2,7 @@
   "globalstrict": true,
   "asi": true,
   "browser": true,
-  "jquery": true
+  "jquery": true,
+  "devel": true,
+  "globals": {"$J": true}
 }
