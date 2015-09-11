@@ -9,10 +9,11 @@ if( !isset( $_SESSION[ 'SteamID' ] ) )
 
 $Config = json_decode( file_get_contents( __DIR__ . '/../php/files/config.json' ) );
 $CDN = $Config->Assets->Host;
+$VERILINKS_SERVER = $Config->Assets->VeriLinksServer;
 
 header( 'Content-Security-Policy: ' .
     'default-src \'none\'; ' .
-    'connect-src \'self\' ' . $CDN . '; ' .
+    'connect-src \'self\' ' . $CDN . $VERILINKS_SERVER  . '; ' .
     'img-src \'self\' data: ' . $CDN . ' https://steamcdn-a.akamaihd.net https://www.google-analytics.com; ' .
     'script-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . ' https://www.google-analytics.com; ' .
     'style-src \'unsafe-inline\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
