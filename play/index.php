@@ -14,8 +14,8 @@ $VERILINKS_SERVER = $Config->Assets->VeriLinksServer;
 header( 'Content-Security-Policy: ' .
     'default-src \'none\'; ' .
     'connect-src \'self\' ' . $CDN . $VERILINKS_SERVER  . '; ' .
-    'img-src \'self\' data: ' . $CDN . ' https://steamcdn-a.akamaihd.net https://www.google-analytics.com; ' .
-    'script-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . ' https://www.google-analytics.com; ' .
+    'img-src \'self\' data: ' . $CDN . ' https://steamcdn-a.akamaihd.net https://www.google-analytics.com' . $VERILINKS_SERVER . ' * ; ' .
+    'script-src \'unsafe-eval\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . ' https://www.google-analytics.com ' . $VERILINKS_SERVER . '; ' .
     'style-src \'unsafe-inline\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
     'font-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
     'media-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; '
@@ -263,31 +263,8 @@ header( 'Content-Security-Policy: ' .
         </div>
 
         <!-- Container for VeriLinks Widget -->
-        <div id="verilinks">
-          <div class="task">
-            <!-- Un-/lock-->
-            <p>
-            Locking verification methods:
-            <div id="verilinks_unlock">unlock</div>
-            <div id="verilinks_lock">lock</div>
-            </p>
-
-            <!-- verification -->
-            <p>
-            Verification of link:
-            <div id="verilinks_true">true</div>
-            <div id="verilinks_false">false</div>
-            <div id="verilinks_unsure">unsure</div>
-            </p>
-            <p>
-            Get Evaluation of latest verification:
-            <div id="verilinks_evaluation">get evaluation</div>
-            </p>
-            <p>
-            Commit verified links:
-            <div id="verilinks_commit">commit verifications</div>
-            </p>
-          </div>
+        <div id="veritask" class = "verilinks">
+    
         </div>
 
         <div class="player_ctn">
@@ -461,6 +438,7 @@ header( 'Content-Security-Policy: ' .
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi.min.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi-spine.min.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi-particles.min.js"></script>
+    <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/jsrender.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/verilinks.js"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/thirdparty/pixi-functions.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/thirdparty/pixi-functions.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/minigame.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/minigame.js' ); ?>"></script>
@@ -470,6 +448,6 @@ header( 'Content-Security-Policy: ' .
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/ui.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/ui.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/easing.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/easing.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/enemies.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/enemies.js' ); ?>"></script>
+  <script src="http://localhost:9000/widget" type="text/javascript"></script>
   </body>
-
   </html>

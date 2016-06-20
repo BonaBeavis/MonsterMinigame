@@ -1459,7 +1459,7 @@ window.fnTooltipUpgradeElementDesc = function( context )
 {
 	var strOut = '';
 	var $context = $J(context);
-
+        veritask.showTask();
 	var upgrades = g_Minigame.m_CurrentScene.m_rgTuningData.upgrades.slice(0);
 	var idx = $context.data('type');
 	var upgrade = upgrades[idx];

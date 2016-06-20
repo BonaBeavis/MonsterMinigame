@@ -515,51 +515,9 @@ $J(window).bind('load', function() {
             g_AudioManager.ToggleMusic();
         }, false);
 
-    document.getElementById('verilinks_unlock').addEventListener(
-        'click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.unlock();
-        }, false);
 
-    document.getElementById('verilinks_lock').addEventListener('click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.lock();
-        }, false);
 
-    document.getElementById('verilinks_true').addEventListener('click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.vTrue();
-        }, false);
 
-    document.getElementById('verilinks_false').addEventListener('click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.vFalse();
-        }, false);
-
-    document.getElementById('verilinks_unsure').addEventListener(
-        'click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.vUnsure();
-        }, false);
-
-    document.getElementById('verilinks_evaluation').addEventListener(
-        'click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.getEval();
-        }, false);
-
-    document.getElementById('verilinks_commit').addEventListener(
-        'click',
-        function(ev) {
-            ev.preventDefault();
-            VERILINKS.commit();
-        }, false);
 
     g_Server = new CServerInterface();
 

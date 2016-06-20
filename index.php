@@ -2,7 +2,9 @@
 session_start();
 $Config = json_decode( file_get_contents( __DIR__ . '/php/files/config.json' ) );
 $CDN = $Config->Assets->Host;
-header( 'Content-Security-Policy: script-src \'none\';' );
+$VERILINKS_SERVER = $Config->Assets->VeriLinksServer;
+header( 'Content-Security-Policy: script-src \'none\';'.
+'script-src \'self\' \'unsafe-eval\' ' . $CDN . $VERILINKS_SERVER  . '; ' );
 ?><!DOCTYPE html>
 
 <html lang="en">

@@ -42,8 +42,6 @@ var Verilinks = (function($) {
             });
     }
 
-    function generateLinkRequestURL() {}
-
     return {
         init: init,
     }
