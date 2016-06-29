@@ -14,7 +14,7 @@ $VERILINKS_SERVER = $Config->Assets->VeriLinksServer;
 header( 'Content-Security-Policy: ' .
     'default-src \'none\'; ' .
     'connect-src \'self\' ' . $CDN . $VERILINKS_SERVER  . '; ' .
-    'img-src \'self\' data: ' . $CDN . 'https://steamcommunity.com https://steamcdn-a.akamaihd.net https://www.google-analytics.com' . $VERILINKS_SERVER . ' * ; ' .
+    'img-src \'self\' data: ' . $CDN . 'https://steamcommunity.com https://steamcdn-a.akamaihd.net https://www.google-analytics.com ' . $VERILINKS_SERVER . ' * ; ' .
     'script-src \'unsafe-eval\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . ' https://www.google-analytics.com ' . $VERILINKS_SERVER . '; ' .
     'style-src \'unsafe-inline\' ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
     'font-src ' . ( empty( $CDN ) ? "'self'" : $CDN ) . '; ' .
