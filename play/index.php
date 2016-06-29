@@ -446,6 +446,6 @@ header( 'Content-Security-Policy: ' .
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/ui.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/ui.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/easing.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/easing.js' ); ?>"></script>
     <script type="text/javascript" src="<?php echo $CDN; ?>/assets/javascript/enemies.js?v=<?php echo hash_file( 'crc32', __DIR__ . '/../assets/javascript/enemies.js' ); ?>"></script>
-  <script src="http://localhost:9000/widget" type="text/javascript"></script>
+    <script type="text/javascript" src="<?php echo $VERILINKS_SERVER; ?>/widget"></script>
   </body>
   </html>
