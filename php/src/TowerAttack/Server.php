@@ -85,6 +85,14 @@ class Server
                 }
 
                 break;
+
+            case 'GetPlayers':
+                $Response =
+                    [
+                        'players' => $this->Game->GetActivePlayers()
+                    ];
+                break;
+
             case 'GetPlayerData':
                 $Player = $this->Game->GetPlayer( $Data[ 'steamid' ] );
 

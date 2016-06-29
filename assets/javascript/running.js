@@ -121,6 +121,8 @@ window.CSceneGame = function()
 		instance.ClearNewPlayer();
 	};
 
+        this.m_VeritaskLastRequest = Date.now();
+
 	g_Server.m_nGameID = instance.m_Manager.gameid;
 	instance.m_rgTuningData = instance.m_Manager.rgTuningData;
 	instance.m_rgTuningData.upgrades = V_ToArray( instance.m_Manager.rgTuningData.upgrades );
@@ -425,8 +427,18 @@ CSceneGame.prototype.Tick = function()
 			this.m_Container.y = Math.random() * 10 - 5;
 		}
 	}
+        this.RequestVeritask();
 
 
+}
+
+CSceneGame.prototype.RequestVeritask = function( ){
+    var date = Date.now()
+    if( date - this.m_VeritaskLastRequest > 5000 && !$J('#veritask').is(":visible")) {
+        this.m_VeritaskLastRequest = date;
+        veritask.challengeUser(g_steamID);
+        console.log("Challenge!");
+    }
 }
 
 CSceneGame.prototype.UpdatePlayerData = function( )
