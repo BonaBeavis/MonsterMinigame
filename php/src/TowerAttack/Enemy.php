@@ -48,8 +48,8 @@ class Enemy
 		$TuningData = self::GetTuningData( self::GetEnemyTypeName( $Type ) );
 		return ceil( Util::PredictValue(
 			$TuningData[ 'hp_exponent' ],
-			$TuningData[ 'hp' ],
-			$Level * ( $RoomSize / 1500 ) // TODO: Move constant somewhere else
+                        $TuningData[ 'hp' ] * $RoomSize,
+			$Level// * ( $RoomSize / 1500 ) // TODO: Move constant somewhere else
 		) );
 	}
 

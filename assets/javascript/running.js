@@ -434,7 +434,11 @@ CSceneGame.prototype.Tick = function()
 
 CSceneGame.prototype.RequestVeritask = function( ){
     var date = Date.now()
-    if( date - this.m_VeritaskLastRequest > 5000 && !$J('#veritask').is(":visible")) {
+    if (
+        date - this.m_VeritaskLastRequest > 5000 &&
+        !$J('#veritask').is(":visible") &&
+        veritask.challengeUser !== undefined
+    ) {
         this.m_VeritaskLastRequest = date;
         veritask.challengeUser(g_steamID);
         console.log("Challenge!");

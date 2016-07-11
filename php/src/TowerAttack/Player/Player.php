@@ -38,7 +38,7 @@ class Player
 	private $LastLoot = null;
 	private $CurrentLane = 0;
 	private $Target = 0;
-	private $Gold = 100000000; # TODO: Set to 0
+	private $Gold = 0;
 	private $ActiveAbilitiesBitfield = 0;
 	private $ActiveAbilities = [];
 	private $Loot = [];

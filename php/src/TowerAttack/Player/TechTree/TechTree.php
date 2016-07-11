@@ -41,7 +41,7 @@ class TechTree
 	private $AbilityItems = array();
 	private $BossLootDropPercentage = 0.25;
 	private $DamageMultiplierDps = 1.0;
-	private $DamagePerClickMultiplier = 0;
+	private $DamagePerClickMultiplier = 1;
 	private $MaxHp = 0;
 	public $BaseDps = 0;
 	public $Dps = 0;

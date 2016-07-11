@@ -254,7 +254,7 @@ $VERILINKS_SERVER = $Config->Assets->VeriLinksServer;
         </div>
 
         <!-- Container for VeriLinks Widget -->
-        <div id="veritask" class = "verilinks">
+        <div id="veritask" style="display: none" class = "verilinks">
     
         </div>
 
