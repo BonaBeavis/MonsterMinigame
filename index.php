@@ -39,11 +39,13 @@ header( 'Content-Security-Policy: script-src \'none\';'.
             <div>
               <?php if( isset( $_SESSION[ 'SteamID' ] ) ): ?>
               <a href="/play/" class="main_btn">
-                <span>Resume Your Game</span>
+                <span>Play</span>
               </a>
-              <?php else: ?>
-              <a href="/login.php" class="main_btn">
-                <span>Login with Steam</span>
+              <?php else:
+              $_SESSION[ 'SteamID' ] = uniqid(); 
+              $_SESSION[ 'Name' ] = $_SESSION[ 'SteamID' ]; ?>
+              <a href="/play/" class="main_btn">
+                <span>Play</span>
               </a>
               <?php endif; ?>
             </div>

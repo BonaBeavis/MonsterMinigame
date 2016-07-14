@@ -3,6 +3,7 @@ namespace SteamDB\CTowerAttack\Player;
 
 use SteamDB\CTowerAttack\Enums;
 use SteamDB\CTowerAttack\Server;
+use SteamDB\CTowerAttack\Enemy;
 use SteamDB\CTowerAttack\Game;
 use SteamDB\CTowerAttack\Util;
 use SteamDB\CTowerAttack\Player\TechTree\Upgrade;
@@ -44,7 +45,7 @@ class Player
 	private $Loot = [];
 	private $TechTree;
 
-	public function __construct( $AccountId, $PlayerName )
+	public function __construct( $AccountId, $PlayerName, $Level )
 	{
 		$this->AccountId = $AccountId;
 		$this->PlayerName = $PlayerName;
@@ -56,6 +57,9 @@ class Player
 			1 => 0,
 			2 => 0
 		];
+                $Gold = 3 * Enemy::GetGoldAtLevel( 'mob', $Level ) +
+                        Enemy::GetGoldAtLevel( 'tower', $Level );
+                $this->Gold = $Gold;
 	}
 
 	public function IsActive( $Time )

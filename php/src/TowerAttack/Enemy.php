@@ -58,7 +58,7 @@ class Enemy
 		return self::GetValueAtLevel( 'dps', $Type, $Level );
 	}
 
-	private static function GetGoldAtLevel( $Type, $Level )
+	public static function GetGoldAtLevel( $Type, $Level )
 	{
 		return self::GetValueAtLevel( 'gold', $Type, $Level );
 	}

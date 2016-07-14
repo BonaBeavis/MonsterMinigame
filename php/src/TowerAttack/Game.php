@@ -75,7 +75,7 @@ class Game
     {
         Server::GetLogger()->debug( 'Creating new player ' . $Name . ': #' . $AccountId);
 
-        $Player = new Player\Player($AccountId, $Name);
+        $Player = new Player\Player($AccountId, $Name, $this->Level);
         $Player->LastActive = $this->Time;
 
         $this->Players[ $AccountId ] = $Player;

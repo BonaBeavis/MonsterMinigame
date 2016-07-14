@@ -10,7 +10,7 @@
         "hp": 1000,
         "dps": 0,
         "gold_multiplier_while_dead": "0.75",
-        "damage_per_click": 10,
+        "damage_per_click": 100000000,
         "damage_multiplier_fire": 1,
         "damage_multiplier_water": 1,
         "damage_multiplier_air": 1,
@@ -65,7 +65,7 @@
         "gold": 500,
         "hp_multiplier": "1.5",
         "hp_extra": 0,
-        "hp_exponent": 3,
+        "hp_exponent": 2,
         "dps_multiplier": 1,
         "dps_exponent": "1.2",
         "gold_multiplier": "1.9",
@@ -91,7 +91,7 @@
         "1": {
             "name": "Fire Weapon",
             "type": 0,
-            "max_num_clicks": 20
+            "max_num_clicks": 10
         },
         "2": {
             "name": "Change Lane",
@@ -353,7 +353,7 @@
         },
         "2": {
             "name": "Armor Piercing Round",
-            "multiplier": 1,
+            "multiplier": 0.5,
             "type": 2,
             "cost": 200,
             "cost_exponential_base": "1.2",

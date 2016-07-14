@@ -37,7 +37,7 @@ class TechTree
 	private $UnlockedAbilitiesBitfield = 0;
 	private $HpMultiplier = 1.0;
 	private $CritPercentage = 0;
-	private $BadgePoints = 1000; #TODO: Remove
+	private $BadgePoints = 0; #TODO: Remove
 	private $AbilityItems = array();
 	private $BossLootDropPercentage = 0.25;
 	private $DamageMultiplierDps = 1.0;
