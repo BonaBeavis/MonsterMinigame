@@ -427,7 +427,7 @@ CSceneGame.prototype.Tick = function()
 			this.m_Container.y = Math.random() * 10 - 5;
 		}
 	}
-        this.RequestVeritask();
+        //this.RequestVeritask();
 
 
 }
@@ -440,7 +440,7 @@ CSceneGame.prototype.RequestVeritask = function( ){
         veritask.challengeUser !== undefined
     ) {
         this.m_VeritaskLastRequest = date;
-        veritask.challengeUser(g_steamID);
+        veritask.challengeUser(g_steamID, "", function(){console.log("YEAH!!")});
         console.log("Challenge!");
     }
 }
@@ -1487,7 +1487,7 @@ CSceneGame.prototype.DoScreenShake = function()
 	this.m_nShakeTimer = 0;
 }
 
-CSceneGame.prototype.TryAbility = function( ele )
+CSceneGame.prototype.TryAbility = function( ele, veritaskValidation )
 {
 	var instance = this;
 	var $ele = $J(ele);
@@ -1500,6 +1500,16 @@ CSceneGame.prototype.TryAbility = function( ele )
 		g_AudioManager.play( 'wrongselection' );
 		return;
 	}
+
+        if( nAbilityID === 8 &&  veritaskValidation === undefined) {
+            veritask.challengeUser(
+                g_steamID,
+                "",
+                function(){instance.TryAbility(ele, true);},
+                function(){g_AudioManager.play( 'wrongselection' );}
+            );
+            return;
+        }
 
 	this.m_rgAbilityQueue.push({
 		'ability': nAbilityID

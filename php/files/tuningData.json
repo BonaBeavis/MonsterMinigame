@@ -146,7 +146,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 20,
-            "cooldown": 3600,
+            "cooldown": 0,
             "desc": "Increases gold dropped by enemies in the current lane"
         },
         "9": {
@@ -467,7 +467,7 @@
         "14": {
             "name": "Metal Detector",
             "type": 8,
-            "cost": 10000000,
+            "cost": 100,
             "cost_exponential_base": "2.2",
             "ability": 8,
             "desc": "Increases gold dropped by enemies in the current lane"
