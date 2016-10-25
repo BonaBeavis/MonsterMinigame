@@ -427,7 +427,7 @@ CSceneGame.prototype.Tick = function()
 			this.m_Container.y = Math.random() * 10 - 5;
 		}
 	}
-        //this.RequestVeritask();
+        this.RequestVeritask();
 
 
 }
@@ -440,7 +440,12 @@ CSceneGame.prototype.RequestVeritask = function( ){
         veritask.challengeUser !== undefined
     ) {
         this.m_VeritaskLastRequest = date;
-        veritask.challengeUser(g_steamID, "", function(){console.log("YEAH!!")});
+        veritask.challengeUser(
+            g_steamID,
+            "",
+            function(){console.log("logged")},
+            function(){console.log("YEAH!!")} ,
+            false);
         console.log("Challenge!");
     }
 }
@@ -1506,7 +1511,8 @@ CSceneGame.prototype.TryAbility = function( ele, veritaskValidation )
                 g_steamID,
                 "",
                 function(){instance.TryAbility(ele, true);},
-                function(){g_AudioManager.play( 'wrongselection' );}
+                function(){g_AudioManager.play( 'wrongselection' );},
+                true
             );
             return;
         }
