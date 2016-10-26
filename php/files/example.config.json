@@ -1,14 +1,6 @@
 {
-	"Steam":
-	{
-		"APIKey": "your api key"
-	},
 	"Assets":
 	{
-		"Host": ""
-	},
-	"Google":
-	{
-		"Analytics": ""
+                "VeriLinksServer": "http://localhost:9000"
 	}
 }

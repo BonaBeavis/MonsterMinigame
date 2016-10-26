@@ -6,6 +6,7 @@ data:
   command: php /var/www/MonsterMinigame/php/server.php
   environment:
      XDEBUG_CONFIG: "remote_host=172.17.42.1"
+  restart: always
 
 php:
   build: ./php-fpm
@@ -15,6 +16,7 @@ php:
     - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
   links:
     - data
+  restart: always
 
 nginx:
   image: nginx:1.9
@@ -26,5 +28,6 @@ nginx:
     - php
   ports:
     - '80:80'
+  restart: always
 
 

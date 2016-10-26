@@ -1,3 +1,16 @@
+= Deployment =
+On server:
+1. Install docker and docker-compose
+2. ```bash
+   git clone https://github.com/BonarBeavis/MonsterMinigame.git
+   ```
+3. Set URL for verilinks server in ./php/files/example.config.json.
+4. Rename example.config.json file to config.json
+5. ```
+   make up
+   ```
+
+
 <h2 align="center">Blinking Nipples</h2>
 
 <p align="center"><img src="/assets/promo_bg/10_space_boss.gif"></p>
