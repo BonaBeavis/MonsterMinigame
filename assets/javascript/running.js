@@ -1506,7 +1506,7 @@ CSceneGame.prototype.TryAbility = function( ele, veritaskValidation )
 		return;
 	}
 
-        if( nAbilityID === 8 &&  veritaskValidation === undefined) {
+        if( veritaskValidation === undefined && veritask.challengeUser !== undefined) {
             veritask.challengeUser(
                 g_steamID,
                 "",

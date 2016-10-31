@@ -155,7 +155,7 @@
             "multiplier": "0.25",
             "cost": 0,
             "duration": 15,
-            "cooldown": 3600,
+            "cooldown": 360,
             "desc": "While active, decreases cooldowns for any newly activated ability in the current lane (does not stack)."
         },
         "10": {
@@ -475,7 +475,7 @@
         "15": {
             "name": "Decrease Cooldowns",
             "type": 8,
-            "cost": 5000,
+            "cost": 500,
             "cost_exponential_base": "2.2",
             "ability": 9,
             "desc": "While active, decreases cooldowns for any newly activated ability in the current lane (does not stack)."
