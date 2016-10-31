@@ -10,7 +10,7 @@
         "hp": 1000,
         "dps": 0,
         "gold_multiplier_while_dead": "0.75",
-        "damage_per_click": 100000000,
+        "damage_per_click": 10,
         "damage_multiplier_fire": 1,
         "damage_multiplier_water": 1,
         "damage_multiplier_air": 1,
@@ -21,7 +21,7 @@
     },
     "tower": {
         "respawn_time": 30,
-        "hp": 600,
+        "hp": 60000,
         "dps": "1.25",
         "gold": 100,
         "hp_multiplier": "1.2",
@@ -34,7 +34,7 @@
         "gold_exponent": "1.1"
     },
     "mob": {
-        "hp": 100,
+        "hp": 5000,
         "dps": 1,
         "gold": 30,
         "hp_multiplier": "1.2",
@@ -49,7 +49,7 @@
     },
     "miniboss": {
         "respawn_time": 900,
-        "hp": 600,
+        "hp": 60000,
         "dps": "1.25",
         "gold": 100,
         "hp_multiplier": "1.2",
@@ -60,12 +60,12 @@
         "gold_exponent": "1.1"
     },
     "boss": {
-        "hp": 2600,
+        "hp": 260000,
         "dps": 3,
         "gold": 500,
         "hp_multiplier": "1.5",
         "hp_extra": 0,
-        "hp_exponent": 2,
+        "hp_exponent": 3,
         "dps_multiplier": 1,
         "dps_exponent": "1.2",
         "gold_multiplier": "1.9",
@@ -73,7 +73,7 @@
         "gold_exponent": "1.25"
     },
     "treasure_mob": {
-        "hp": 600,
+        "hp": 60000,
         "dps": 1,
         "gold": 200,
         "hp_multiplier": "1.2",
@@ -91,7 +91,7 @@
         "1": {
             "name": "Fire Weapon",
             "type": 0,
-            "max_num_clicks": 10
+            "max_num_clicks": 20
         },
         "2": {
             "name": "Change Lane",
@@ -146,7 +146,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 20,
-            "cooldown": 0,
+            "cooldown": 3600,
             "desc": "Increases gold dropped by enemies in the current lane"
         },
         "9": {
@@ -353,7 +353,7 @@
         },
         "2": {
             "name": "Armor Piercing Round",
-            "multiplier": 0.5,
+            "multiplier": 1,
             "type": 2,
             "cost": 200,
             "cost_exponential_base": "1.2",
@@ -447,7 +447,7 @@
         "12": {
             "name": "Morale Booster",
             "type": 8,
-            "cost": 10000000,
+            "cost": 10000,
             "cost_exponential_base": "2.2",
             "required_upgrade": 1,
             "required_upgrade_level": 20,
@@ -457,7 +457,7 @@
         "13": {
             "name": "Good Luck Charms",
             "type": 8,
-            "cost": 1000000,
+            "cost": 1000,
             "cost_exponential_base": "2.2",
             "required_upgrade": 2,
             "required_upgrade_level": 5,
@@ -467,7 +467,7 @@
         "14": {
             "name": "Metal Detector",
             "type": 8,
-            "cost": 100,
+            "cost": 5000,
             "cost_exponential_base": "2.2",
             "ability": 8,
             "desc": "Increases gold dropped by enemies in the current lane"
@@ -475,7 +475,7 @@
         "15": {
             "name": "Decrease Cooldowns",
             "type": 8,
-            "cost": 10000000,
+            "cost": 5000,
             "cost_exponential_base": "2.2",
             "ability": 9,
             "desc": "While active, decreases cooldowns for any newly activated ability in the current lane (does not stack)."
@@ -762,3 +762,4 @@
         }
     }
 }
+

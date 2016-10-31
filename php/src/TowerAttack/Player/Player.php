@@ -57,9 +57,9 @@ class Player
 			1 => 0,
 			2 => 0
 		];
-                $Gold = 3 * Enemy::GetGoldAtLevel( 'mob', $Level ) +
-                        Enemy::GetGoldAtLevel( 'tower', $Level );
-                $this->Gold = $Gold;
+                /* $Gold = 3 * Enemy::GetGoldAtLevel( 'mob', $Level ) + */
+                /*         Enemy::GetGoldAtLevel( 'tower', $Level ); */
+                /* $this->Gold = $Gold; */
 	}
 
 	public function IsActive( $Time )

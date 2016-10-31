@@ -1,8 +1,8 @@
 up: git
 	docker-compose -f ./build/docker-compose.yml up
 
-restart: git
-	docker-compose -f ./build/docker-compose.yml up --force-recreate
+restart:
+	docker-compose -f ./build/docker-compose.yml up -d --force-recreate
 
 rebuild: git
 	docker-compose -f ./build/docker-compose.yml up --force-recreate
