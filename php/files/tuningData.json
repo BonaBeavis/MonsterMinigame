@@ -119,7 +119,7 @@
             "multiplier": "0.2",
             "cost": 0,
             "duration": 10,
-            "cooldown": 1800,
+            "cooldown": 180,
             "desc": "Increases all damage done by players in the current lane"
         },
         "6": {
@@ -128,7 +128,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 15,
-            "cooldown": 1800,
+            "cooldown": 180,
             "desc": "Increases chance to do critical click damage for players in the current lane"
         },
         "7": {
@@ -137,7 +137,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 5,
-            "cooldown": 300,
+            "cooldown": 30,
             "desc": "Slowly heals everyone in the current lane that is still alive"
         },
         "8": {
@@ -146,7 +146,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 20,
-            "cooldown": 3600,
+            "cooldown": 360,
             "desc": "Increases gold dropped by enemies in the current lane"
         },
         "9": {
@@ -155,7 +155,7 @@
             "multiplier": "0.25",
             "cost": 0,
             "duration": 15,
-            "cooldown": 360,
+            "cooldown": 60,
             "desc": "While active, decreases cooldowns for any newly activated ability in the current lane (does not stack)."
         },
         "10": {
@@ -166,7 +166,7 @@
             "cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 3600,
+            "cooldown": 360,
             "desc": "Launches a tactical nuclear missile that does high damage to your current target."
         },
         "11": {
@@ -176,7 +176,7 @@
             "cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 3600,
+            "cooldown": 360,
             "desc": "Drops a cluster bomb, damaging all enemies in your lane."
         },
         "12": {
@@ -185,7 +185,7 @@
             "multiplier": "0.05",
             "cost": 0,
             "duration": 10,
-            "cooldown": 3600,
+            "cooldown": 360,
             "desc": "Drops napalm, inflicting damage on all enemies in your lane over time."
         },
         "13": {
@@ -309,7 +309,7 @@
             "badge_points_cost": 200,
             "instant": 1,
             "duration": 10,
-            "cooldown": 1800,
+            "cooldown": 180,
             "desc": "Grant every alive player in your lane one random special item.<br><br>This item can only be acquired by spending badge points."
         },
         "26": {
