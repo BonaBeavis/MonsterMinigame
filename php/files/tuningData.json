@@ -119,7 +119,7 @@
             "multiplier": "0.2",
             "cost": 0,
             "duration": 10,
-            "cooldown": 180,
+            "cooldown": 30,
             "desc": "Increases all damage done by players in the current lane"
         },
         "6": {
@@ -128,7 +128,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 15,
-            "cooldown": 180,
+            "cooldown": 30,
             "desc": "Increases chance to do critical click damage for players in the current lane"
         },
         "7": {
@@ -146,7 +146,7 @@
             "multiplier": "0.1",
             "cost": 0,
             "duration": 20,
-            "cooldown": 360,
+            "cooldown": 30,
             "desc": "Increases gold dropped by enemies in the current lane"
         },
         "9": {
@@ -166,7 +166,7 @@
             "cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 360,
+            "cooldown": 120,
             "desc": "Launches a tactical nuclear missile that does high damage to your current target."
         },
         "11": {
@@ -176,7 +176,7 @@
             "cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 360,
+            "cooldown": 120,
             "desc": "Drops a cluster bomb, damaging all enemies in your lane."
         },
         "12": {
@@ -185,14 +185,14 @@
             "multiplier": "0.05",
             "cost": 0,
             "duration": 10,
-            "cooldown": 360,
+            "cooldown": 120,
             "desc": "Drops napalm, inflicting damage on all enemies in your lane over time."
         },
         "13": {
             "name": "Resurrection",
             "type": 3,
             "multiplier": 1,
-            "badge_points_cost": 10,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 5,
             "cooldown": 30,
@@ -202,36 +202,36 @@
             "name": "Cripple Spawner",
             "type": 3,
             "multiplier": 1,
-            "badge_points_cost": 10,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 60,
+            "cooldown": 30,
             "desc": "Damages a spawner down to 1 HP."
         },
         "15": {
             "name": "Cripple Monster",
             "type": 3,
             "multiplier": "0.05",
-            "badge_points_cost": 5,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 60,
+            "cooldown": 30,
             "desc": "Reduces player's current target to 1 HP for normal monsters or up to 5% max health for a boss monster."
         },
         "16": {
             "name": "Max Elemental Damage",
             "type": 3,
             "multiplier": 1,
-            "badge_points_cost": 10,
+            "badge_points_cost": 0,
             "duration": 5,
-            "cooldown": 60,
+            "cooldown": 30,
             "desc": "All players in your lane apply their highest elemental damage multiplier, regardless of the monster's elemental weakness."
         },
         "17": {
             "name": "Raining Gold",
             "type": 3,
             "multiplier": "0.01",
-            "badge_points_cost": 10,
+            "badge_points_cost": 0,
             "duration": 10,
             "cooldown": 30,
             "desc": "All players in your lane will receive 1% of their target's gold per click while this is active."
@@ -240,17 +240,17 @@
             "name": "Crit",
             "type": 3,
             "multiplier": "0.01",
-            "badge_points_cost": 10,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 5,
-            "cooldown": 60,
+            "cooldown": 10,
             "desc": "Permanently increases your chance to do critical click damage by 1% and automatically deploys Good Luck Charms for free."
         },
         "19": {
             "name": "Pumped Up",
             "type": 3,
             "multiplier": "0.1",
-            "badge_points_cost": 1,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 5,
             "cooldown": 10,
@@ -260,7 +260,7 @@
             "name": "Throw Money At Screen",
             "type": 3,
             "multiplier": "0.1",
-            "badge_points_cost": 10,
+            "badge_points_cost": 0,
             "duration": 5,
             "cooldown": 10,
             "desc": "Spend 10% of your gold and damage your current target by up to 10% of their max health."
@@ -269,7 +269,7 @@
             "name": "GOD MODE",
             "type": 3,
             "multiplier": 1,
-            "badge_points_cost": 1,
+            "badge_points_cost": 0,
             "duration": 5,
             "cooldown": 5,
             "desc": "Temporarily take no damage."
@@ -278,7 +278,7 @@
             "name": "Treasure!",
             "type": 3,
             "multiplier": 100000,
-            "badge_points_cost": 2,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 0,
             "cooldown": 5,
@@ -288,7 +288,7 @@
             "name": "Steal Health",
             "type": 3,
             "multiplier": "0.1",
-            "badge_points_cost": 5,
+            "badge_points_cost": 0,
             "duration": 10,
             "cooldown": 10,
             "desc": "Replenishes the health of all players in your lane based on the click damage they do to their target."
@@ -297,7 +297,7 @@
             "name": "Reflect Damage",
             "type": 3,
             "multiplier": "0.5",
-            "badge_points_cost": 5,
+            "badge_points_cost": 0,
             "duration": 10,
             "cooldown": 30,
             "desc": "Monsters take damage based on how much damage they deal out."
@@ -306,7 +306,7 @@
             "name": "Feeling Lucky",
             "type": 3,
             "multiplier": 1,
-            "badge_points_cost": 200,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 10,
             "cooldown": 180,
@@ -317,7 +317,7 @@
             "type": 3,
             "multiplier": 1,
             "gold_multiplier": 50000,
-            "badge_points_cost": 100,
+            "badge_points_cost": 0,
             "instant": 1,
             "duration": 10,
             "cooldown": 60,
@@ -327,7 +327,7 @@
             "name": "Like New",
             "type": 3,
             "multiplier": 1,
-            "badge_points_cost": 100,
+            "badge_points_cost": 0,
             "duration": 5,
             "cooldown": 1,
             "desc": "While active, clears the cooldown on every ability for all players in your lane.<br><br>This item can only be acquired by spending badge points."
