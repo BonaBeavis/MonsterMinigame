@@ -438,7 +438,7 @@
         "11": {
             "name": "Medics",
             "type": 8,
-            "cost": 5000,
+            "cost": 1000,
             "cost_exponential_base": "2.2",
             "required_upgrade": 0,
             "ability": 7,
@@ -447,7 +447,7 @@
         "12": {
             "name": "Morale Booster",
             "type": 8,
-            "cost": 10000,
+            "cost": 1000,
             "cost_exponential_base": "2.2",
             "required_upgrade": 1,
             "required_upgrade_level": 20,
@@ -467,7 +467,7 @@
         "14": {
             "name": "Metal Detector",
             "type": 8,
-            "cost": 5000,
+            "cost": 1000,
             "cost_exponential_base": "2.2",
             "ability": 8,
             "desc": "Increases gold dropped by enemies in the current lane"
@@ -475,7 +475,7 @@
         "15": {
             "name": "Decrease Cooldowns",
             "type": 8,
-            "cost": 500,
+            "cost": 1000,
             "cost_exponential_base": "2.2",
             "ability": 9,
             "desc": "While active, decreases cooldowns for any newly activated ability in the current lane (does not stack)."
@@ -483,7 +483,7 @@
         "16": {
             "name": "Tactical Nuke",
             "type": 8,
-            "cost": 100000,
+            "cost": 1000,
             "cost_exponential_base": 5,
             "required_upgrade": 2,
             "required_upgrade_level": 10,
@@ -493,7 +493,7 @@
         "17": {
             "name": "Cluster Bomb",
             "type": 8,
-            "cost": 1000000,
+            "cost": 1000,
             "cost_exponential_base": "2.2",
             "ability": 11,
             "required_upgrade": 1,
@@ -503,7 +503,7 @@
         "18": {
             "name": "Napalm",
             "type": 8,
-            "cost": 2000000,
+            "cost": 2000,
             "cost_exponential_base": "2.2",
             "ability": 12,
             "required_upgrade": 1,
